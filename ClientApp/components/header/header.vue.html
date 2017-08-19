@@ -1,0 +1,119 @@
+<template>
+  <div class="header navbar navbar-default">
+
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="javascript:void(0)">Hafiz Abass</a>
+      </div>
+
+
+
+      <div class="navbar-collapse collapse navbar-right navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+
+          <li class="dropdown">
+
+            <a v-if="!authenticated" class="login-btn" href="#" @click="auth.login()"><i class="material-icons">exit_to_app</i> Login </a>
+
+            <a v-if="authenticated" class="dropdown-toggle" data-toggle="dropdown" href="#"> <img :src="userProfile.picture" class="user-image-small"> 
+              {{ userProfile.name }} <b class="caret"></b>
+            </a>
+            
+            
+
+            <ul class="dropdown-menu dropwrapper">
+              <li>
+                <img :src="userProfile.picture" class="user-image">
+                <p>  {{ userProfile.name }} </p>
+              </li>
+
+              <li><a href="#">Page 1-2</a></li>
+              <li><a href="#">Page 1-3</a></li>
+              <li class="divider"></li>
+
+              <li class="visible-xs">
+                <ul class="dropdown">
+                  <li>
+                    <router-link to="/vehicle/new" :exact="true" class="btn btn-link">
+                      <span class="glyphicon glyphicon-add"></span> New
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+              <li class="divider"></li>
+
+              <li class="separate">
+                <span>          
+              <a href="#" class="btn btn-link" style="float: left;"><span class="glyphicon glyphicon-user "></span>                Sign Up</a>
+
+                <a @click.prevent="auth.logout()" href="#" class="btn btn-link"> 
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+              </a>
+                </span>
+              </li>
+
+            </ul>
+
+          </li>
+        </ul>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</template>
+
+<style>
+    .dropwrapper .separate {
+        padding: 4px;
+    }
+    
+    .dropwrapper .separate a {
+        text-decoration: none;
+    }
+    
+    .dropwrapper {
+        width: 220px;
+        padding-top: 10px;
+        text-align: center;
+        z-index: 3;
+    }
+    
+    .login-btn {
+        margin: 8px;
+    }
+    
+    .user-image {
+        border: 1px solid lightgrey;
+        padding: 5px;
+        margin-right: 7px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background: #E9E8E8;
+    }
+    
+    .user-image-small {
+        border: 1px solid lightgrey;
+        height: 22px;
+        width: 22px;
+        margin: 8px;
+        border-radius: 50%;
+        background: #E9E8E8;
+    }
+    
+    .link-text {
+        position: absolute;
+        top: 33%;
+        vertical-align: middle !important;
+    }
+</style>
+
+<script src="./header.ts"></script>

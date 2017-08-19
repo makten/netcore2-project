@@ -1,0 +1,65 @@
+<template>
+ 
+  <div class="side-nav" ref="sidebar" :style="{ height: windowHeight + 'px' }">
+ 
+  <div class="logo">
+         
+     <router-link to="/" :exact="true" class="">         
+          <span style="color:bisque; padding: 3px;"> <i class="fa fa-tachometer"></i>  {{ logo }} </span>
+    </router-link>
+  </div>
+
+  <nav class="side-list">
+
+    <div class="profile-wrapper">
+
+      <router-link to="/user/settings" :exact="true" class="">        
+        <!--../../../wwwroot/img/prof1.jpg -->
+          <img :src="userProfile.picture" class="user-image" alt="User Image" />
+          <p style="color:bisque; padding: 3px;">{{ userProfile.name }}</p>
+      </router-link>
+                
+    </div>
+
+    <ul>  
+      <li v-for="item in linkList" :class="{ active: item.active }" @click="changeActive(item.link)"> 
+        <router-link :to="item.link" :exact="true">
+          <span v-html="item.icon"></span> <span class="link-text" v-text="item.title"> </span>
+        </router-link>
+                 
+      </li> 
+     
+    </ul>
+    
+  </nav>
+
+</div>
+
+  
+</template>
+<style>
+    .profile-wrapper {
+        height: 100px;
+        background: #1F60C1;
+        padding-top: 10px;
+        text-align: center;
+    }
+    
+    .user-image {
+        border: 1px solid lightgrey;
+        padding: 1px;
+        margin-right: 7px;
+        height: 55px;
+        width: 55px;
+        border-radius: 50%;
+        background: #E9E8E8;
+    }
+    
+    .link-text {
+        position: absolute;
+        top: 33%;
+        vertical-align: middle !important;
+    }
+</style>
+
+<script src="./sidebar.ts"></script>
