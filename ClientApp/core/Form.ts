@@ -8,7 +8,7 @@ export default class Form {
     originalData: any;
     errors: any = {};
 
-    constructor(data) {
+    constructor(data: any) {
 
 
         this.originalData = data;
@@ -26,7 +26,7 @@ export default class Form {
 
     data() {
 
-        let data = {};
+        let data: any = {};
 
         for (let property in this.originalData) {
 
@@ -46,18 +46,18 @@ export default class Form {
     }
 
 
-    post(url) {
+    post(url: string) {
         return this.submit('post', url)
     }
 
 
-    put(url) {   
+    put(url: string) {   
         alert('you hit put') ;    
         return this.submit('put', url);
     }
 
 
-    patch(url) {
+    patch(url: string) {
         return this.submit('patch', url);
     }
 
@@ -67,12 +67,12 @@ export default class Form {
     }
 
 
-    submit(requestType, url) {
+    submit(requestType: string, url: string) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve: any, reject: any) => {
 
             axios[requestType](url, this.data())
-                .then(response => {
+                .then((response: any) => {
 
                     this.onSuccess(response.data);
 
@@ -80,7 +80,7 @@ export default class Form {
                     resolve(response.data);
 
                 })
-                .catch(error => {
+                .catch((error: any) => {
 
                     this.onFail(error.response)
 
@@ -93,7 +93,7 @@ export default class Form {
     }
 
 
-    onSuccess(response) {
+    onSuccess(response: any) {
 
         if (!_.isEmpty(response.error)) {
 
@@ -109,8 +109,10 @@ export default class Form {
 
     }
 
-    onFail(response) {
+    onFail(response: any) {
         this.errors.record(response.error)
     }
 
 }
+
+declare var Promise: any;

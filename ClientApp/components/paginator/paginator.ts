@@ -8,7 +8,7 @@ export default class PaginatorComponent extends Vue {
 
 
     @Prop({})
-    totalItems: Number;
+    totalItems: number;
 
     @Prop({type: Number, default: 10})
     pageSize: any;

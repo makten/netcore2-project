@@ -3,7 +3,7 @@ import { Prop, Component } from 'vue-property-decorator';
 import auth0 from 'auth0-js';
 import Vue from 'vue';
 import * as globals from '.././globals';
-
+var jwtDecode = require('jwt-decode');
 
 
 export default class AuthService extends Vue {
@@ -11,6 +11,8 @@ export default class AuthService extends Vue {
     authenticated: any = this.isAuthenticated()
     authNotifier: any = globals.eventBroadcaster;
     userProfile: any = {};
+    expiration: string = '';
+    tok: string = "QkQ1EBZAFQhZYPuL";
 
 
     auth0: any = new auth0.WebAuth({
@@ -32,9 +34,7 @@ export default class AuthService extends Vue {
 
 
     login() {
-
         this.auth0.authorize();
-
     }
 
     handleAuthentication() {
@@ -46,8 +46,7 @@ export default class AuthService extends Vue {
 
                 this.auth0.client.userInfo(authResult.accessToken, function (err: any, user: any) {
 
-                    localStorage.setItem('profile', JSON.stringify(user))
-                                   
+                    localStorage.setItem('profile', JSON.stringify(user))          
                     
                 });
 
@@ -62,13 +61,13 @@ export default class AuthService extends Vue {
 
 
     setSession(authResult: any) {
-        console.log(authResult)
-
+        
         // Set the time that the access token will expire at
         let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
         localStorage.setItem('access_token', authResult.accessToken)
         localStorage.setItem('id_token', authResult.idToken)
         localStorage.setItem('expires_at', expiresAt)
+       
 
         this.authNotifier.$emit('authChange', { authenticated: true })
         window.location.reload();
@@ -95,8 +94,7 @@ export default class AuthService extends Vue {
 
     isAuthenticated() {
         // Check whether the current time is past the
-        // access token's expiry time
-       
+        // access token's expiry time        
         let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
         return new Date().getTime() < expiresAt
     }

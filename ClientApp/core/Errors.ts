@@ -7,7 +7,7 @@ export default class Errors {
     }
 
     //Check if error exists -- v-if="error.has('fieldname')" <span>
-    has(field) {
+    has(field: any) {
 
         return this.errors.hasOwnProperty(field);
 
@@ -20,7 +20,7 @@ export default class Errors {
     }
 
     //Get error by field name
-    get(field) {
+    get(field: any) {
 
         if (this.errors[field]) {
 
@@ -29,14 +29,14 @@ export default class Errors {
     }
 
     //register all errors
-    record(errors) {
+    record(errors: any) {
 
         this.errors = errors;
 
     }
 
     //Clear error onkeydown by field -- apply @keydown="errors.clear($event.target.name)" to <form>
-    clear(field) {
+    clear(field: any) {
 
         if (field) {
 

@@ -1,6 +1,6 @@
 export default {
     
-    lowerBound(num, limit) {
+    lowerBound(num: number, limit: number) {
         return num >= limit ? num : limit
     }
 }

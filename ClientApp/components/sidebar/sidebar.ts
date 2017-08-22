@@ -38,7 +38,7 @@ export default class DashboardComponent extends Vue {
       // window.addEventListener('resize', this.resizeSidebar);
       let profile = localStorage.getItem('profile');
       if (typeof profile !== 'undefined' && profile !== null)
-        this.userProfile = JSON.parse(localStorage.getItem('profile'));
+        this.userProfile = JSON.parse(profile);
 
       this.changeActive(window.location.pathname);
 

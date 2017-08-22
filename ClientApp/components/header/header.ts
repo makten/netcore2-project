@@ -19,10 +19,10 @@ export default class HeaderComponent extends Vue {
   userProfile: any = {};
 
   mounted() {
-
+    
     let profile = localStorage.getItem('profile');
     if (typeof profile !== 'undefined' && profile !== null)
-      this.userProfile = JSON.parse(localStorage.getItem('profile'));
+      this.userProfile = JSON.parse(profile);
 
   }
 

@@ -24,7 +24,6 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
-    "@types/auth0-js": "^8.6.2",
     "@types/chartjs": "0.0.30",
     "@types/d3": "^4.10.0",
     "@types/jquery": "^3.2.11",
@@ -32,9 +31,11 @@
     "auth0-js": "^8.9.1",
     "axios": "^0.16.2",
     "bootstrap-material-design": "^0.5.10",
+    "chart.js": "^2.6.0",
     "chartjs": "^0.3.24",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "vee-validate": "^2.0.0-rc.8",
     "velocity-animate": "^1.5.0",

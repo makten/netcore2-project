@@ -5,11 +5,6 @@ import { Component } from 'vue-property-decorator';
 import * as _ from 'lodash';
 
 
-let Constr = Vue.extend(require('../.././core/notify/notify.vue.html'))
-
-
-
-
 //Core components
 import Form from '../../core/Form';
 
@@ -29,8 +24,7 @@ interface Model {
 }
 
 
-Vue.component('pagination', require('../paginator/paginator.vue.html'))
-Vue.extend(require('../.././core/notify/notify.vue.html'))
+Vue.component('pagination', require('../paginator/paginator.vue.html'));
 
 
 @Component
@@ -105,9 +99,9 @@ export default class VehicleFormComponent extends Vue {
 
         let parts = []
         for (let prop in obj) {
-            let value = obj[prop]
-
-            if (value != null && value != undefined)
+            let value: any = obj[prop]
+            
+            if (value != null && value != undefined)                
                 parts.push(encodeURI(prop) + "=" + encodeURI(value))
 
         }
@@ -238,7 +232,8 @@ export default class VehicleFormComponent extends Vue {
         if (confirm("Are you sure you want to delete this item?"))
             this.vehicleForm.delete(`/api/vehicles/${vehicleId}`).then(s => {
                 alert(`vehicle with ID ${vehicleId} has been deleted`);
-                this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
+
+                // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
             }).
                 catch(e => {
                     console.log(e)
