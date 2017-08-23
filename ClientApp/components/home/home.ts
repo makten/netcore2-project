@@ -8,11 +8,13 @@ export default class MainDashboardComponent extends Vue {
     queryResult: any = {}
 
     mounted(){
+
         this.getAllVehicles();
     }
 
     
     getAllVehicles () {
+        
         axios.get("api/dashboard").then(response => {
             this.queryResult = response.data
         })

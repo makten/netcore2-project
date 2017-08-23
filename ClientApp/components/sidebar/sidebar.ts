@@ -3,6 +3,7 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import vSelect from 'vue-select';
 import * as _ from 'lodash';
+import * as globals from '../../globals';
 
 
 @Component
@@ -11,11 +12,10 @@ export default class DashboardComponent extends Vue {
   userProfile: any = {};
   linkList: any[] = [
     { icon: '<i class="material-icons md-24" aria-hidden="true">dashboard</i>', title: 'Dashboard', link: '/', active: true },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">local_mall</i>', title: 'My Purchases', link: '/vehicles', active: false },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">help</i>', title: 'Help', link: '/vehicles', active: false },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">directions_car</i>', title: 'Vehicles', link: '/vehicles', active: false },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">list</i>', title: 'Test Data', link: '/fetchdata', active: false },
+    { icon: '<i class="material-icons md-24" aria-hidden="true">local_mall</i>', title: 'My Purchases', link: '/fetchdata', active: false },    
+    // { icon: '<i class="material-icons md-24" aria-hidden="true">directions_car</i>', title: 'Vehicles', link: '/vehicles', active: false },    
     { icon: '<i class="material-icons md-24" aria-hidden="true">note_add</i>', title: 'Create Vehicle', link: '/vehicle/new', active: false },
+    { icon: '<i class="material-icons md-24" aria-hidden="true">help</i>', title: 'FAQ', link: '/vehicles', active: false },
     { icon: '<i class="material-icons md-24" aria-hidden="true">info</i>', title: 'About', link: '/vehicle/new', active: false },
   ];
 
@@ -26,7 +26,9 @@ export default class DashboardComponent extends Vue {
 
   ];
 
-  logo: string = 'VueJS .NET Core';
+  themeColor: string = '#35475e'
+
+  logo: string = 'Hafiz Abass App';
 
 
   windowHeight: number = 0;
@@ -34,7 +36,7 @@ export default class DashboardComponent extends Vue {
 
   mounted() {
     this.$nextTick(function () {
-      this.resizeSidebar();
+      
       // window.addEventListener('resize', this.resizeSidebar);
       let profile = localStorage.getItem('profile');
       if (typeof profile !== 'undefined' && profile !== null)
@@ -42,14 +44,13 @@ export default class DashboardComponent extends Vue {
 
       this.changeActive(window.location.pathname);
 
+      globals.eventBroadcaster.$on('themeChanged', (theme) => { this.themeColor = theme; } )
+
+
     })
   }
 
-  resizeSidebar() {
-    this.windowHeight = this.$root.$el.offsetHeight > this.$el.offsetHeight ? this.$root.$el.offsetHeight + 10 : this.$el.offsetHeight;
-  }
-
-
+  
   changeActive(title) {
 
     this.linkList = _.map(this.linkList, link => {
@@ -60,9 +61,7 @@ export default class DashboardComponent extends Vue {
       }
       else {
         link.active = false;
-      }
-
-      this.resizeSidebar();
+      }     
 
       return link;
 
@@ -75,7 +74,7 @@ export default class DashboardComponent extends Vue {
   }
 
   @Watch('sideSize')
-  onSidebarSize(sidebarZise, oldval) { alert('red') }
+  onSidebarSize(sidebarZise, oldval) { }
 
 }
 

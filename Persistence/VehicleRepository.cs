@@ -17,7 +17,6 @@ namespace dashboard.Persistence
         public VehicleRepository(DashboardDbContext context)
         {
             this.context = context;
-
         }
 
 

@@ -1,10 +1,10 @@
 <template>
  
-  <div class="side-nav" ref="sidebar" :style="{ height: windowHeight + 'px' }">
+  <div class="side-nav fixed-left" ref="sidebar" :style="{ height: windowHeight + 'px', background: themeColor }">
  
   <div class="logo">
          
-     <router-link to="/" :exact="true" class="">         
+     <router-link to="/" :exact="true">         
           <span style="color:bisque; padding: 3px;"> <i class="fa fa-tachometer"></i>  {{ logo }} </span>
     </router-link>
   </div>
@@ -12,11 +12,14 @@
   <nav class="side-list">
 
     <div class="profile-wrapper">
-
+      
       <router-link to="/user/settings" :exact="true" class="">        
-        <!--../../../wwwroot/img/prof1.jpg -->
-          <img :src="userProfile.picture" class="user-image" alt="User Image" />
-          <p style="color:bisque; padding: 3px;">{{ userProfile.name }}</p>
+        
+                    
+          <img v-if="!userProfile.picture" src="../../../wwwroot/img/prof1.jpg" class="user-image" alt="User Image" />
+          <img v-else :src="userProfile.picture" class="user-image" alt="User Image" />
+
+          <p style="color:bisque; padding: 3px; font-weight: bolder;">{{ userProfile.name }}</p>
       </router-link>
                 
     </div>
@@ -38,8 +41,17 @@
   
 </template>
 <style>
+    .fixed-left {
+        position: fixed;
+        left: 0;
+        height: 100%;
+        overflow-y: auto;
+        z-index: 2000;
+        transition: all 0.4s ease 0s;
+    }
+    
     .profile-wrapper {
-        height: 100px;
+        height: 10%;
         background: #1F60C1;
         padding-top: 10px;
         text-align: center;

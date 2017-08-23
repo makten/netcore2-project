@@ -1,63 +1,108 @@
 <template>
-  <div class="header navbar navbar-default">
+  <div class="header navbar navbar-default fixed-top" :style="{background: themeColor}">
 
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <!-- <div class="navbar-header"> -->
+        <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse"> -->
+        <!-- <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <a class="navbar-brand" href="javascript:void(0)">Hafiz Abass</a>
-      </div>
+        <span class="icon-bar"></span> -->
+      <!-- </button> -->
+        <!-- <a class="navbar-brand" href="javascript:void(0)">Hafiz Abass</a> -->
+      <!-- </div> -->
 
 
 
-      <div class="navbar-collapse collapse navbar-right navbar-responsive-collapse">
+      <div style="position: absolute; right: 180px;">
+
         <ul class="nav navbar-nav">
 
           <li class="dropdown">
 
-            <a v-if="!authenticated" class="login-btn" href="#" @click="auth.login()"><i class="material-icons">exit_to_app</i> Login </a>
-
-            <a v-if="authenticated" class="dropdown-toggle" data-toggle="dropdown" href="#"> <img :src="userProfile.picture" class="user-image-small"> 
-              {{ userProfile.name }} <b class="caret"></b>
+            <a data-toggle="dropdown" href="#">            
+              <img src="../../../wwwroot/img/icons/rainbow-icon.png" class="theme-selector-icon"/>              
             </a>
-            
-            
+
+            <ul class="dropdown-menu" >
+              <div class="panel">
+                <div class="panel-body">
+                  <ul v-for="theme in themes" class="themes-ul"> 
+
+                    <li @click="setTheme(theme.color)">
+                      <span>
+                        <i :style="{ color: theme.color }" class="fa fa-circle" aria-hidden="true"></i> {{ theme.name }}
+                      </span>
+                    </li>                               
+                  
+                  </ul>               
+                </div>                 
+              </div>
+            </ul>              
+
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="drop navbar-collapse navbar-right navbar-responsive-collapse" style="position: absolute; right: -8px;">
+
+        <ul class="nav navbar-nav">
+
+          <li class="dropdown" style="margin-right: 0px;">
+
+            <a v-if="!authenticated" class="login-btn" href="#" @click="auth.login()">
+              <i class="material-icons">exit_to_app</i> Login 
+            </a>
+
+            <a v-if="authenticated" class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+              <img :src="userProfile.picture" class="user-image-small"> 
+              <span class="hidden-xs"> {{ userProfile.name }} <b class="caret"></b></span>
+            </a>
 
             <ul class="dropdown-menu dropwrapper">
-              <li>
-                <img :src="userProfile.picture" class="user-image">
-                <p>  {{ userProfile.name }} </p>
-              </li>
-
-              <li><a href="#">Page 1-2</a></li>
-              <li><a href="#">Page 1-3</a></li>
-              <li class="divider"></li>
-
-              <li class="visible-xs">
-                <ul class="dropdown">
+              <div class="panel">
+                <div class="panel-body">
+                  <ul>
+                  
                   <li>
-                    <router-link to="/vehicle/new" :exact="true" class="btn btn-link">
-                      <span class="glyphicon glyphicon-add"></span> New
-                    </router-link>
+                    <img :src="userProfile.picture" class="user-image">
+                    <p>  {{ userProfile.name }} </p>
+                  </li>                     
+                  
+                  <li><a href="#">Placeholder 1</a></li>
+                  <li><a href="#">Placeholder 2</a></li>
+                  
+                  <li class="divider"></li>
+
+                  <li class="visible-xs">
+
+                    <ul class="dropdown">
+                      <li>
+                        <router-link to="/vehicle/new" :exact="true" class="btn btn-link">
+                          <span><i class="material-icons">note_add</i></span> New
+                        </router-link>
+
+                        <router-link to="/fetchdata" :exact="true" class="btn btn-link">
+                          <span><i class="material-icons">list</i></span> Vehicles
+                        </router-link>
+                      </li>
+                    </ul>
+
                   </li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-
-              <li class="separate">
-                <span>          
-              <a href="#" class="btn btn-link" style="float: left;"><span class="glyphicon glyphicon-user "></span>                Sign Up</a>
-
-                <a @click.prevent="auth.logout()" href="#" class="btn btn-link"> 
-                <span class="glyphicon glyphicon-log-out"></span> Logout
-              </a>
-                </span>
-              </li>
-
-            </ul>
+                  
+                  </ul>               
+                </div>  
+                
+                <a @click.prevent="auth.logout()" href="#" class="btn btn-xs btn-block btn-primary" > 
+                  <span>
+                      <i class="fa fa-fw fa-power-off"></i>
+                  </span> 
+                  Logout
+                </a>               
+                 
+              </div>
+            </ul>              
 
           </li>
         </ul>
@@ -71,8 +116,65 @@
 </template>
 
 <style>
+    .theme-selector-icon {
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #c7c7c7;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    
+    .themes-ul {
+        padding: 0px !important;
+        margin-left: 0px !important;
+    }
+    
+    .themes-ul li:hover {
+        cursor: pointer;
+    }
+    
+    .test-inline ul li {
+        float: left;
+        text-align: center;
+        width: 33.3%;
+        height: 100px;
+        display: block;
+        padding: 20px 15px 15px;
+        height: 100px;
+        position: relative;
+        border: 1px solid #ddd;
+    }
+    
+    .test-inline li {
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+    }
+    
+    .dropdown-toggle {
+        margin-bottom: -5px;
+        padding-bottom: 0px;
+        margin-top: -10px;
+        margin-right: 10px;
+        padding-top: 10px;
+    }
+    
+    .login-btn {
+        margin-bottom: 10px;
+        margin-top: -10px !important;
+        padding-top: 10px;
+    }
+    
+    .drop ul,
+    .drop li {
+        list-style: none;
+        padding: 0;
+    }
+    
     .dropwrapper .separate {
-        padding: 4px;
+        padding: 2px;
     }
     
     .dropwrapper .separate a {
@@ -81,9 +183,12 @@
     
     .dropwrapper {
         width: 220px;
-        padding-top: 10px;
+        padding: 5px;
         text-align: center;
+        align-content: center;
+        padding-top: 10px;
         z-index: 3;
+        margin-top: -7px !important;
     }
     
     .login-btn {
@@ -101,9 +206,9 @@
     }
     
     .user-image-small {
-        border: 1px solid lightgrey;
-        height: 22px;
-        width: 22px;
+        border: 1px solid #bfbfbf;
+        height: 25px;
+        width: 25px;
         margin: 8px;
         border-radius: 50%;
         background: #E9E8E8;

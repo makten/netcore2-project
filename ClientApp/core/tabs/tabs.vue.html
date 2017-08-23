@@ -2,7 +2,7 @@
 
 	<div>
 
-        <div class="container" id="exTab3">
+        <div class="container tabs" id="exTab3">
             <ul class="nav nav-pills" id="myTab" >
                 <li v-for="tab in tabs" :class="{ 'is-active': tab.isActive }" >
                     <a :href="tab.href" @click="selectTab(tab.href)">{{ tab.name }}</a>
@@ -21,7 +21,7 @@
         background: #e5e5e5;
     }
     
-    .nav>li>a {
+    .tabs .nav>li>a {
         padding-top: 4px;
         padding-bottom: 4px;
     }

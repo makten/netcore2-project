@@ -63,6 +63,13 @@ namespace dashboard_app
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //Workaround for HRM (text/mime) problem --------------- 
+                app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
+                    HotModuleReplacement = true,
+                    HotModuleReplacementEndpoint = "/dist/_webpack_hrm"
+                });
+
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true
