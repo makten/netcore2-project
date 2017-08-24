@@ -1,0 +1,57 @@
+<template>
+        
+    <div>
+
+        <div class="modal fade" 
+        :id="modalname" 
+        tabindex="-1" 
+        role="dialog" 
+        data-backdrop="static" 
+        data-keyboard="false">
+
+        <div class="modal-dialog modal-lg" :style="styleObject">
+
+            <div class="modal-content" :class="{'mini-dashboard': isDashboard}">
+
+                <div class="modal-header">
+                    <button @click="$emit('closeModal')" type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h5 class="modal-title"> 
+                        <slot name="title"></slot>
+                    </h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <slot name="body"></slot>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <slot name="footer"></slot>
+                    <button @click="$emit('closeModal')" type="button" class="btn btn-xs btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    </template>
+
+<script src="./modal.ts"></script>
+
+<style>
+    .mini-dashboard {
+        background: #24303a;
+    }
+    
+    .smallchart {
+        color: #4a667a !important;
+        background-color: #1e2730 !important;
+    }
+</style>

@@ -75,8 +75,8 @@ export default class VehicleFormComponent extends Vue {
         this.getVehicles(this.query);
         this.getMakes();
         this.getModels();
-        this.getFeatures();            
-        
+        this.getFeatures();
+
     }
 
     //Pagination event handler
@@ -100,8 +100,8 @@ export default class VehicleFormComponent extends Vue {
         let parts = []
         for (let prop in obj) {
             let value: any = obj[prop]
-            
-            if (value != null && value != undefined)                
+
+            if (value != null && value != undefined)
                 parts.push(encodeURI(prop) + "=" + encodeURI(value))
 
         }
@@ -234,10 +234,10 @@ export default class VehicleFormComponent extends Vue {
                 alert(`vehicle with ID ${vehicleId} has been deleted`);
 
                 // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
-            }).
-                catch(e => {
-                    console.log(e)
-                });
+            })
+            .catch(e => {
+                console.log(e)
+            });
 
     }
 

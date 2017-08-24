@@ -13,7 +13,7 @@
 
 
 
-      <div style="position: absolute; right: 180px;">
+      <div class="theme-icon-wrapper">
 
         <ul class="nav navbar-nav">
 
@@ -45,7 +45,7 @@
       </div>
 
 
-      <div class="drop navbar-collapse navbar-right navbar-responsive-collapse" style="position: absolute; right: -8px;">
+      <div class="drop navbar-collapse navbar-right navbar-responsive-collapse" style="position: absolute; right: 0px; top: 0px;">
 
         <ul class="nav navbar-nav">
 
@@ -116,6 +116,13 @@
 </template>
 
 <style>
+    @media screen and (min-width: 600px) {
+        .theme-icon-wrapper {
+            position: absolute;
+            right: 182px;
+        }
+    }
+    
     .theme-selector-icon {
         border-radius: 50%;
         width: 15px;

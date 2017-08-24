@@ -31,11 +31,11 @@
                                             <i class="material-icons">art_track</i>
                                         
                                         </button>
-                                            <button type="button" class="btn btn-success btn-xs">
+                                        <button @click="editVehicle(vehicle)" type="button" class="btn btn-success btn-xs">
                                             <i class="material-icons">edit</i>
                                         </button>
 
-                                            <button type="button" class="btn btn-danger btn-xs">
+                                        <button @click="deleteVehicle(vehicle.id)" type="button" class="btn btn-danger btn-xs">
                                             <i class="material-icons">close</i>                                        
                                         </button>
 
@@ -106,14 +106,25 @@
 
         </div>
 
-    </div>
+        <modal width="50" modalname="modal-fault-details" v-if="openEditModal" @closeModal="openEditModal = false"> 
+            <template slot="title">
+                <h3>Default Title</h3>
+            </template>
+
+<template slot="body">
+                {{ vehicleForm }}
+                <!-- {{ vehicleEdit }} -->
+            </template>
+</modal>
+
+</div>
 </template>
 
 <style>
     .card-product {
         margin-top: 30px;
     }
-
+    
     .card {
         display: inline-block;
         position: relative;
@@ -124,7 +135,7 @@
         color: rgba(0, 0, 0, 0.87);
         background: #fff;
     }
-
+    
     .card .card-image {
         height: 60%;
         position: relative;
@@ -136,61 +147,61 @@
         z-index: 3;
         box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
     }
-
+    
     .card .card-content {
         padding: 15px 20px;
         position: relative;
     }
-
+    
     .card .card-footer {
         margin: 0 20px 10px;
         padding-top: 10px;
         border-top: 1px solid #eeeeee;
     }
-
+    
     .card .card-footer div {
         display: inline-block;
     }
-
+    
     .card .card-footer .stats {
         line-height: 22px;
         color: #999999;
         font-size: 12px;
     }
-
+    
     .card .card-footer div {
         display: inline-block;
     }
-
+    
     .pull-right {
         float: right;
     }
-
+    
     .pull-right {
         float: right!important;
     }
-
+    
     .card .card-footer .stats .category {
         padding-top: 7px;
         padding-bottom: 7px;
         margin-bottom: 0;
     }
-
+    
     .card .category:not([class*="text-"]) {
         color: #999999;
         font-size: 14px;
     }
-
+    
     .card-product .card-title,
     .card-product .category,
     .card-product .card-features {
         text-align: center;
     }
-
+    
     .card-features {
         text-align: left !important;
     }
-
+    
     .vehicle-images {
         height: 200px;
         overflow: hidden;
