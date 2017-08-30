@@ -81,7 +81,15 @@ namespace dashboard.Controllers
 
             return Ok(mapper.Map<Photo, PhotoResource>(photo));
 
+        }
 
+        [HttpDelete("{Id}")]
+        public IActionResult DeletePhoto(int Id)
+        {
+            var uploadFolderPath = Path.Combine(host.WebRootPath, "uploads");
+            photosRepository.DeletePhoto(Id, uploadFolderPath);
+
+            return Ok("OK");
         }
     }
 }

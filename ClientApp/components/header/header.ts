@@ -5,6 +5,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import * as _ from 'lodash';
 import * as $ from 'jquery';
 import * as globals from '../../globals';
+import Helpers from '../../core/Helpers';
 
 
 
@@ -32,6 +33,11 @@ export default class HeaderComponent extends Vue {
   themeColor: string = '#35475e';
 
   mounted() {
+
+    //Testing textSummarizer...
+    let v = "Hello world of people and programmers who are busy learning and really really really";
+    console.log(Helpers.textSummerizer(v, 60));
+    console.log(Helpers.passwordGenerator());
     
     let profile = localStorage.getItem('profile');
     if (typeof profile !== 'undefined' && profile !== null)
