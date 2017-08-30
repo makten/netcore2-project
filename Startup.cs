@@ -34,9 +34,10 @@ namespace dashboard_app
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer( options => {
-                options.Authority = "https://api.dashboardapp.com";
-                options.Audience = "https://dashapp.eu.auth0.com/";
+                options.Authority = "https://dashapp.eu.auth0.com/";
+                options.Audience = "http://localhost:53413/";
                 options.RequireHttpsMetadata = false;
+                // https://api.dashboardapp.com
             });
 
 

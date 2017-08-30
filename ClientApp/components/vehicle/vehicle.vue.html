@@ -18,7 +18,9 @@
                                 <div class="card card-product">
                                     <div class="card-image">
                                         <a href="JavaScript:void(0)">
-                                        <img class="img" src="../../../wwwroot/img/car.png">
+                                        <img v-if="photos.length > 0" class="img" :src="'/uploads/' + photos[0].photoName" style="width: 100%;">
+                                        <img v-else class="img" src="../../../wwwroot/img/car.png" style="width: 100%;">
+                                        
                                     </a>
                                         <div class="ripple-container"></div>
                                     </div>
@@ -82,8 +84,7 @@
 
                     <tab :name="'Photo'">
 
-                        <h4>Photos</h4>
-                      
+                        <h4>Photos</h4>                     
 
                         <div class="form-group">
                             <input type="file" name="photo" @change="processFile($event)">
@@ -96,7 +97,21 @@
                         </div>
 
                         <br/>
-                        <img v-for="photo in photos" :src="'/uploads/'+ photo.photoName" class="img-thumbnail vehicle-images">
+
+                       
+                            <div v-for="photo in photos" class="phto col-md-4">
+                                <div class="delete">
+                                    <a class="text-danger" @click.prevent="deletePhoto(photo.id)" style="color: red;">
+                                            &times;
+                                    </a>
+                                </div>
+                                <img :src="'/uploads/'+ photo.photoName" 
+                                class="img-thumbnail vehicle-images"                                
+                                >                                
+                                
+                            </div>
+                       
+                                            
 
                     </tab>
 
@@ -106,7 +121,7 @@
 
         </div>
 
-        <modal width="50" modalname="modal-fault-details" v-if="openEditModal" @closeModal="openEditModal = false"> 
+        <modal modalname="modal-fault-details" v-if="openEditModal" @closeModal="openEditModal = false"> 
             <template slot="title">
                 <h3>Default Title</h3>
             </template>
@@ -121,6 +136,19 @@
 </template>
 
 <style>
+    .delete {
+        display: none;
+        position: absolute;
+        left: 25px;
+        top: 10px;
+        font-size: 30px;
+    }
+    
+    .phto:hover .delete {
+        display: block;
+        cursor: pointer;
+    }
+    
     .card-product {
         margin-top: 30px;
     }
@@ -205,7 +233,6 @@
     .vehicle-images {
         height: 200px;
         overflow: hidden;
-        margin-left: 15px;
         margin-right: 15px;
         margin-top: 5px;
         border-radius: 6px;

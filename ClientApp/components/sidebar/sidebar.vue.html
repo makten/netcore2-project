@@ -13,8 +13,7 @@
 
     <div class="profile-wrapper">
       
-      <router-link to="/user/settings" :exact="true" class="">        
-        
+      <router-link to="/user/settings" :exact="true" class=""> 
                     
           <img v-if="!userProfile.picture" src="../../../wwwroot/img/prof1.jpg" class="user-image" alt="User Image" />
           <img v-else :src="userProfile.picture" class="user-image" alt="User Image" />
@@ -24,10 +23,12 @@
                 
     </div>
 
-    <ul>  
-      <li v-for="item in linkList" :class="{ active: item.active }" @click="changeActive(item.link)"> 
+    <ul> 
+
+      <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)"> 
         <router-link :to="item.link" :exact="true">
-          <span v-html="item.icon"></span> <span class="link-text" v-text="item.title"> </span>
+          <span v-html="item.icon"></span> 
+          <span class="link-text" v-text="item.title"> </span>       
         </router-link>
                  
       </li> 
@@ -40,6 +41,7 @@
 
   
 </template>
+
 <style>
     .fixed-left {
         position: fixed;
@@ -48,6 +50,11 @@
         overflow-y: auto;
         z-index: 2000;
         transition: all 0.4s ease 0s;
+    }
+    
+    ul .sidebar-links {
+        padding: 12px !important;
+        font-size: 20px;
     }
     
     .profile-wrapper {

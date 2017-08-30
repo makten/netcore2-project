@@ -12,7 +12,7 @@ export default class ModalComponent extends Vue {
 	@Prop({ required: false, default: false })
 	isDashboard: any;
 
-	@Prop({ required: false, default: 50 })
+	@Prop({ required: false })
 	width: any;
 
 	styleObject: any = { width: this.width + '%', background: "#fff" }

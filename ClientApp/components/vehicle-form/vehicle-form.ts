@@ -3,6 +3,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 // import vSelect from 'vue-select';
 import * as _ from 'lodash';
+import axios from 'axios';
 
 
 //Core components
@@ -229,15 +230,23 @@ export default class VehicleFormComponent extends Vue {
     }
 
     deleteVehicle(vehicleId) {
-        if (confirm("Are you sure you want to delete this item?"))
-            this.vehicleForm.delete(`/api/vehicles/${vehicleId}`).then(s => {
-                alert(`vehicle with ID ${vehicleId} has been deleted`);
 
-                // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
-            })
-            .catch(e => {
-                console.log(e)
-            });
+        const token = localStorage.getItem("access_token");
+
+        if (token != null)
+            if (confirm("Are you sure you want to delete this item?"))
+
+                axios.delete(`/api/vehicles/${vehicleId}`, {
+                    headers: { 'Authorization': "Bearer " + token, 'Content-Type': 'application/json' }
+                })
+                    .then(s => {
+                        alert(`vehicle with ID ${vehicleId} has been deleted`);
+                        // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
+
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    });
 
     }
 

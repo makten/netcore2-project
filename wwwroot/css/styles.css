@@ -240,7 +240,7 @@ span:after {
     }
     .side-nav {
         display: block;
-        width: 70px;
+        width: 90px;
         /* z-index: 2; */
     }
     .side-nav ul li span:nth-child(2) {
@@ -259,7 +259,7 @@ span:after {
         text-align: center;
     }
     .main-content {
-        margin-left: 70px;
+        margin-left: 80px;
     }
 }
 

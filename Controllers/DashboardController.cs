@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dashboard.Controllers
 {
-    
+
     //Apply to all routes
     [Route("/api/dashboard")]
     public class DashboardController : Controller
@@ -34,7 +34,7 @@ namespace dashboard.Controllers
         [HttpGet]
         public async Task<QueryResultResource<VehicleResource>> GetAllVehicles()
         {
-           
+
             var queryResult = await repository.GetVehicleCount();
 
             return mapper.Map<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>(queryResult);

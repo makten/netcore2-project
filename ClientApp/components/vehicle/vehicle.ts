@@ -50,6 +50,7 @@ export default class VehicleComponent extends Vue {
     }
 
 
+
     getVehicle(vehicleId) {
         this.vehicleId = vehicleId;
         fetch(`/api/vehicles/${vehicleId}`)
@@ -112,7 +113,7 @@ export default class VehicleComponent extends Vue {
         this.vehicleForm.formMode.button = 'Update';
         // this.changeVehicle();
         this.openEditModal = true;
-        
+
     }
 
     deleteVehicle(vehicleId) {
@@ -125,10 +126,22 @@ export default class VehicleComponent extends Vue {
 
                 // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
             })
-            .catch(e => {
-                console.log(e)
-            });
+                .catch(e => {
+                    console.log(e)
+                });
 
+    }
+
+    deletePhoto(id) {
+
+        const token = localStorage.getItem("access_token");
+
+        if( token != null)
+            axios.delete(`/api/vehicles/${this.vehicleId}/photos/${id}`, {headers: {Authorization: "Bearer " + token }})
+                .then(response => { 
+                    this.photos = _.reject( this.photos, (photo) => { return photo.id == id })
+                })
+                .catch(error => { })
     }
 
 
