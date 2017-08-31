@@ -22,15 +22,15 @@ export default class HeaderComponent extends Vue {
   userProfile: any = {};
 
   themes: any[] = [
-    { color: '#35475e', name: 'Default'},
-    { color: '#9b37ff', name: 'Purple'},
-    { color: '#00b900', name: 'Green'},
-    { color: '#ff1717', name: 'Red'},
-    { color: '#0079f2', name: 'Blue'},
-    { color: '#c7c7c7', name: 'Light Grey'}
+    { color: '#35475e', name: 'Default', text: '#E3F2FD'},
+    { color: '#5E35B1', name: 'Purple', text: '#E1F5FE'},
+    { color: '#00695C', name: 'Green', text: '#E1F5FE'},
+    { color: '#E53935', name: 'Red', text: '#E1F5FE'},
+    { color: '#1E88E5', name: 'Blue', text: '#E1F5FE'},
+    { color: '#BDBDBD', name: 'Light Grey', text: '#424242'}
   ]
   
-  themeColor: string = '#35475e';
+  themeColor: any = {color:'#35475e', name:'Default',  text: "#E3F2FD"};
 
   mounted() {
 
@@ -47,11 +47,13 @@ export default class HeaderComponent extends Vue {
 
   setTheme(theme)
   {
-    this.themeColor = theme;
+    this.themeColor = theme;    
     globals.eventBroadcaster.$emit('themeChanged', theme)
   }
 
 
 
 }
+
+
 

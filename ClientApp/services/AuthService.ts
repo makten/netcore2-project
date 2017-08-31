@@ -34,15 +34,7 @@ export default class AuthService extends Vue {
         this.isAuthenticated = this.isAuthenticated.bind(this);
     }
 
-    mounted() {
-        
-        this.login = this.login.bind(this);
-        this.setSession = this.setSession.bind(this);
-        this.readRolesFromStorage();
-        this.logout = this.logout.bind(this);
-        this.isAuthenticated = this.isAuthenticated.bind(this);
-    }
-
+   
     login() {
         this.auth0.authorize();
     }
@@ -75,7 +67,7 @@ export default class AuthService extends Vue {
         localStorage.setItem('expires_at', expiresAt)
 
         this.authNotifier.$emit('authChange', { authenticated: true })
-        // window.location.reload();
+        window.location.reload();
 
     }
 

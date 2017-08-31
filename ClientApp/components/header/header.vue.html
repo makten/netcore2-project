@@ -1,7 +1,7 @@
 <template>
-  <div class="header navbar navbar-default fixed-top" :style="{background: themeColor}">
+  <div class="header navbar navbar-default fixed-top" :style="{background: themeColor.color}" >
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <!-- <div class="navbar-header"> -->
         <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse"> -->
         <!-- <span class="icon-bar"></span>
@@ -28,7 +28,7 @@
                 <div class="panel-body">
                   <ul v-for="theme in themes" class="themes-ul"> 
 
-                    <li @click="setTheme(theme.color)">
+                    <li @click="setTheme(theme)">
                       <span>
                         <i :style="{ color: theme.color }" class="fa fa-circle" aria-hidden="true"></i> {{ theme.name }}
                       </span>
@@ -49,13 +49,13 @@
 
         <ul class="nav navbar-nav">
 
-          <li class="dropdown" style="margin-right: 0px;">
+          <li class="dropdown">
 
-            <a v-if="!authenticated" class="login-btn" href="#" @click="auth.login()">
-              <i class="material-icons">exit_to_app</i> Login 
+            <a v-if="!authenticated" class="login-btn" href="#" @click="auth.login()" style="margin-top: 1px !important; font-weight: bolder;" :style="{color: themeColor.text}">
+              <i class="material-icons">exit_to_app</i> Login
             </a>
 
-            <a v-if="authenticated" class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+            <a :style="{color: themeColor.text}" v-if="authenticated" class="dropdown-toggle" data-toggle="dropdown"> 
               <img :src="userProfile.picture" class="user-image-small"> 
               <span class="hidden-xs"> {{ userProfile.name }} <b class="caret"></b></span>
             </a>

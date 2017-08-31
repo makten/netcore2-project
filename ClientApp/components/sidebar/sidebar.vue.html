@@ -1,8 +1,8 @@
 <template>
  
-  <div class="side-nav fixed-left" ref="sidebar" :style="{ height: windowHeight + 'px', background: themeColor }">
+  <div class="side-nav fixed-left" ref="sidebar" :style="{background: themeColor.color}">
  
-  <div class="logo">
+  <div class="logo" :style="{background: themeColor.color}" style="filter: brightness(90%);">
          
      <router-link to="/" :exact="true">         
           <span style="color:bisque; padding: 3px;"> <i class="fa fa-tachometer"></i>  {{ logo }} </span>
@@ -25,11 +25,12 @@
 
     <ul>    
 
-        <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)"> 
-            <router-link :to="item.link" :exact="true">
-            <span v-html="item.icon"></span> 
+        <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)" style="color: red !important;"> 
+            
+            <router-link :to="item.link" :exact="true" :style="{color: themeColor.text}">
+            <span v-html="item.icon" :style="{color: themeColor.text}"></span> 
             <span class="link-text" v-text="item.title"> </span>       
-            </router-link>
+            </router-link>       
                     
         </li> 
 
