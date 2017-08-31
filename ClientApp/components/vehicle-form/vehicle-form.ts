@@ -198,6 +198,9 @@ export default class VehicleFormComponent extends Vue {
 
                 this.vehicleForm[this.vehicleForm.formMode.method](url)
                     .then(data => {
+                        
+                        this.queryResult.push(data)
+                        
                         this.sending = false;
                         this.$root.$router.push('/vehicle/new');
                         this.createEdit = false;
@@ -231,7 +234,10 @@ export default class VehicleFormComponent extends Vue {
 
     deleteVehicle(vehicleId) {
 
-        const token = localStorage.getItem("access_token");
+        const token = localStorage.getItem("id_token");
+       
+
+        
 
         if (token != null)
             if (confirm("Are you sure you want to delete this item?"))
@@ -239,14 +245,15 @@ export default class VehicleFormComponent extends Vue {
                 axios.delete(`/api/vehicles/${vehicleId}`, {
                     headers: { 'Authorization': "Bearer " + token, 'Content-Type': 'application/json' }
                 })
-                    .then(s => {
-                        alert(`vehicle with ID ${vehicleId} has been deleted`);
-                        // this.queryResult.items = _.reject(this.queryResult.items, (v) => { return v.id == vehicleId })
+                .then(s => {
+                    alert(`vehicle with ID ${vehicleId} has been deleted`);
+                    
+                    this.queryResult.items = _.reject(this.queryResult.items, v => { return v['id'] === vehicleId  })
 
-                    })
-                    .catch(e => {
-                        console.log(e)
-                    });
+                })
+                .catch(e => {
+                    console.log(e)
+                });
 
     }
 

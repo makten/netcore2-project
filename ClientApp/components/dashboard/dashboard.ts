@@ -1,16 +1,9 @@
+// import { auth } from './../../globals';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import vSelect from 'vue-select';
 import * as _ from 'lodash';
 import * as globals from '../../globals';
-
-
-import AuthService from '../../services/AuthService';
-
-const auth = new AuthService();
-
-const { login, logout, authenticated, authNotifier } = auth;
-
 
 @Component({
     components: {
@@ -25,14 +18,13 @@ const { login, logout, authenticated, authNotifier } = auth;
 
 export default class DashboardComponent extends Vue {
 
-    authenticated: boolean = authenticated;
-    auth: any = auth;
-    login: any = login;
-    logout: any = logout;
+    authenticated: boolean = globals.authenticated;
+    auth: any = globals.auth;
+    login: any = globals.login;
+    logout: any = globals.logout;
 
 
-    mounted() {
-
+    mounted() {        
         
         globals.eventBroadcaster.$on('changeRoute', (routeLink: any) => {
             this.$root.$router.push(routeLink)

@@ -9,6 +9,7 @@ using dashboard.Core.Models;
 using dashboard.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.ObjectModel;
+using dashboard_app.Controllers;
 
 namespace dashboard.Controllers
 {
@@ -88,7 +89,7 @@ namespace dashboard.Controllers
 
 
         [HttpPut("{id}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
         {
             if (!ModelState.IsValid)
@@ -115,7 +116,7 @@ namespace dashboard.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize]
+        // [Authorize(Roles.RequireAdminRole)]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
             var vehicle = await repository.GetVehicle(id, includeRelated: false);

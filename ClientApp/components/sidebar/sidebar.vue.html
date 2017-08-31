@@ -23,19 +23,27 @@
                 
     </div>
 
-    <ul> 
+    <ul>    
 
-      <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)"> 
-        <router-link :to="item.link" :exact="true">
-          <span v-html="item.icon"></span> 
-          <span class="link-text" v-text="item.title"> </span>       
-        </router-link>
-                 
-      </li> 
+        <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)"> 
+            <router-link :to="item.link" :exact="true">
+            <span v-html="item.icon"></span> 
+            <span class="link-text" v-text="item.title"> </span>       
+            </router-link>
+                    
+        </li> 
+
+        <!-- Show only for admins -->
+        <li v-if="auth.hasRole('Admin')" v-for="adItem in forAdmin" class="sidebar-links" :class="{ active: adItem.active }" @click="changeActive(adItem.link)">
+            <router-link :to="adItem.link" :exact="true">
+                <span v-html="adItem.icon"></span> 
+                <span class="link-text" v-text="adItem.title"> </span>       
+            </router-link>                
+        </li> 
      
     </ul>
-    
-  </nav>
+
+</nav>
 
 </div>
 
@@ -72,12 +80,6 @@
         width: 55px;
         border-radius: 50%;
         background: #E9E8E8;
-    }
-    
-    .link-text {
-        position: absolute;
-        top: 33%;
-        vertical-align: middle !important;
     }
 </style>
 

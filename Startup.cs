@@ -14,6 +14,7 @@ using AutoMapper;
 using dashboard.Persistence;
 using dashboard.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using dashboard_app.Controllers;
 
 namespace dashboard_app
 {
@@ -29,19 +30,7 @@ namespace dashboard_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			//Settings Injection
-            services.AddAuthentication(options => {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer( options => {
-                options.Authority = "https://dashapp.eu.auth0.com/";
-                options.Audience = "http://localhost:53413/";
-                options.RequireHttpsMetadata = false;
-                // https://api.dashboardapp.com
-            });
-
-
-
+			
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
 
             // Repository Injections
@@ -54,6 +43,20 @@ namespace dashboard_app
 
             //Dbcontext service -- Db connection
             services.AddDbContext<DashboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            
+            services.AddAuthorization(options => {
+                // options.AddPolicy("RequireAdminRole", policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
+                options.AddPolicy(Roles.RequireAdminRole, policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
+            })
+            .AddAuthentication(options => {
+                  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer( options => {
+                options.Audience = "https://api.dashboardapp.com";
+                options.Authority = "https://dashapp.eu.auth0.com/";
+                // options.RequireHttpsMetadata = false;                
+            });
 
             services.AddMvc();
         }

@@ -134,7 +134,7 @@ export default class VehicleComponent extends Vue {
 
     deletePhoto(id) {
 
-        const token = localStorage.getItem("access_token");
+        const token = localStorage.getItem("id_token");
 
         if( token != null)
             axios.delete(`/api/vehicles/${this.vehicleId}/photos/${id}`, {headers: {Authorization: "Bearer " + token }})

@@ -2,6 +2,7 @@ import 'bootstrap';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VeeValidate from 'vee-validate';
+import * as globals from './globals';
 
 
 Vue.use(VueRouter);
@@ -23,7 +24,24 @@ const routes = [
 new Vue({
     el: '#app-root',
     router: new VueRouter({ mode: 'history', routes: routes }),
-    mounted() { },
+    mounted() {
+        this.$router.beforeEach((to, from, next) => {
+           
+            if (to.path === '/vehicle/new') {
+                if (globals.auth.hasRole('Admin')) {
+                    next();
+                }
+                else {
+                    next(from.path);
+                }
+
+            }
+            else {
+                next();
+            }
+
+        })
+    },
     render: (h: any) => h(require('./components/app/app.vue.html'))
 });
 

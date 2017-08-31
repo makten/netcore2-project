@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import vSelect from 'vue-select';
@@ -9,6 +8,7 @@ import * as globals from '../../globals';
 @Component
 export default class DashboardComponent extends Vue {
 
+  auth: any = globals.auth;
   userProfile: any = {};
   linkList: any[] = [
     { icon: '<i class="material-icons md-24" aria-hidden="true">dashboard</i>', title: 'Dashboard', link: '/', active: true },
@@ -20,9 +20,9 @@ export default class DashboardComponent extends Vue {
   ];
 
   forAdmin: any[] = [
-    { icon: '<i class="material-icons" aria-hidden="true">dashboard</i>', title: 'Departments', link: '/#', active: false },
-    { icon: '<i class="material-icons" aria-hidden="true">people</i>', title: 'Employees', link: '/buildModel', active: false },
-    { icon: '<i class="material-icons" aria-hidden="true">note_add</i>', title: 'Roles ', link: '/#', active: false }
+    { icon: '<i class="material-icons md-24" aria-hidden="true">business</i>', title: 'Departments', link: '/#', active: false },
+    { icon: '<i class="material-icons md-24" aria-hidden="true">people</i>', title: 'Employees', link: '/buildModel', active: false },
+    { icon: '<i class="material-icons md-24" aria-hidden="true">security</i>', title: 'Roles ', link: '/#', active: false }
 
   ];
 
@@ -30,12 +30,11 @@ export default class DashboardComponent extends Vue {
 
   logo: string = 'Hafiz Abass App';
 
-
   windowHeight: number = 0;
 
 
   mounted() {
-    this.$nextTick(function () {
+    this.$nextTick(function () {      
       
       // window.addEventListener('resize', this.resizeSidebar);
       let profile = localStorage.getItem('profile');
