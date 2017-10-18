@@ -1,29 +1,13 @@
-<link rel="stylesheet" href="./dashboard.css" />
+<style src="./dashboard.css"></style>
 
 <template>
     <div>
 
-        <header-component :auth="auth" :authenticated="authenticated"></header-component>
-        <sidebar-component></sidebar-component>
+        <div class="wrapper dashboard" :style="gridTemplate" style="padding-top: 15px;">
+            <slot></slot>
+        </div> 
         
-         <div class="main-content"> 
-
-            <div class="content"> 
-                <router-view
-                    :auth="auth"
-                    :authenticated="authenticated"
-                >
-                </router-view>                
-            </div> 
-            
-         </div>  
-        
-         <!-- <footer-component></footer-component>  -->
-
     </div>
 </template>
-<style>
-
-</style>
 
 <script src="./dashboard.ts"></script>

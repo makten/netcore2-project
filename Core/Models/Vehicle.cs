@@ -12,9 +12,7 @@ namespace dashboard.Core.Models
     public class Vehicle
     {
        
-        public int Id { get; set; } 
-
-       
+        public int Id { get; set; }        
         public int ModelId { get; set; }
         public Model Model { get; set; }
         // public string Feature { get; set; }
@@ -29,7 +27,6 @@ namespace dashboard.Core.Models
         [StringLength(255)]
         public string ContactPhone { get; set; }
 
-        // [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdate { get; set; }
 
         public ICollection<Photo> Photos { get; set; }

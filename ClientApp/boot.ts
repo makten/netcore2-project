@@ -8,8 +8,21 @@ import * as globals from './globals';
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 
+import moment from 'moment';
+
+moment.updateLocale('en', {
+    calendar: {
+        lastDay: '[Yesterday]',
+        sameDay: '[Today]',
+        nextDay: '[Tomorrow]',
+        lastWeek: '[last] dddd',
+        nextWeek: 'dddd',
+        sameElse: 'L',
+    },
+});
 
 const routes = [
+    { path: '/dashboard', component: require('./components/dashboard/dashboard.vue.html') },
     { path: '/', component: require('./components/home/home.vue.html') },
     { path: '/home', component: require('./components/home/home.vue.html') },
     { path: '/callback', name: 'Callback', component: require('./services/authentication/callback.vue.html') },
@@ -25,27 +38,31 @@ new Vue({
     el: '#app-root',
     router: new VueRouter({ mode: 'history', routes: routes }),
     mounted() {
-        this.$router.beforeEach((to, from, next) => {
+        // this.$router.beforeEach((to, from, next) => {
            
-            if (to.path === '/vehicle/new') {
-                if (globals.auth.hasRole('Admin')) {
-                    next();
-                }
-                else {
-                    next(from.path);
-                }
+        //     if (to.path === '/vehicle/new') {
+        //         if (globals.auth.hasRole('Admin')) {
+        //             next();
+        //         }
+        //         else {
+        //             next(from.path);
+        //         }
 
-            }
-            else {
-                next();
-            }
+        //     }
+        //     else {
+        //         next();
+        //     }
 
-        })
+        // })
     },
     render: (h: any) => h(require('./components/app/app.vue.html'))
 });
 
-
-
-
-
+new Vue({
+    el: '#dashboard-root',
+    router: new VueRouter({ mode: 'history', routes: routes }),
+    mounted() {
+       
+    },
+    render: (h: any) => h(require('./components/dashboard-components/dashboard-components.vue.html'))
+});

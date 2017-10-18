@@ -25,7 +25,6 @@ namespace dashboard.Controllers
             this.unitOfWork = unitOfWork;
             this.repository = repository;
             this.mapper = mapper;
-
         }
 
 

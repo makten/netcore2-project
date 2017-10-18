@@ -23,9 +23,9 @@
                 
     </div>
 
-    <ul>    
+      <ul>    
 
-        <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)" style="color: red !important;"> 
+          <li v-for="item in linkList" class="sidebar-links" :class="{ active: item.active }" @click="changeActive(item.link)" style="color: red !important;"> 
             
             <router-link :to="item.link" :exact="true" :style="{color: themeColor.text}">
             <span v-html="item.icon" :style="{color: themeColor.text}"></span> 

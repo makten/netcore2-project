@@ -1,38 +1,39 @@
 // import { auth } from './../../globals';
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import vSelect from 'vue-select';
 import * as _ from 'lodash';
+import axios from 'axios';
 import * as globals from '../../globals';
 
-@Component({
-    components: {
-        DashboardComponent: require('../dashboard/dashboard.vue.html'),
-        HeaderComponent: require('../header/header.vue.html'),
-        SidebarComponent: require('../sidebar/sidebar.vue.html'),
-        FooterComponent: require('../footer/footer.vue.html'),
-        // MenuComponent: require('../navmenu/navmenu.vue.html'),
 
-    }
-})
+@Component
+export default class DashboardComponent extends Vue {    
 
-export default class DashboardComponent extends Vue {
-
-    authenticated: boolean = globals.authenticated;
-    auth: any = globals.auth;
-    login: any = globals.login;
-    logout: any = globals.logout;
-
-
-    mounted() {        
-        
-        globals.eventBroadcaster.$on('changeRoute', (routeLink: any) => {
-            this.$root.$router.push(routeLink)
-        })
-
-        globals.eventBroadcaster.$on('authChange', (authState: any) => {
-            this.authenticated = authState.authenticated
-        })
-    }
+    queryResult: any = {}
+    
+        @Prop()
+        rows: number;
+        @Prop()
+        columns: number;
+    
+        mounted() {
+    
+            // this.getAllVehicles();
+        }
+    
+    
+        getAllVehicles() {
+    
+            axios.get("api/dashboard").then(response => {
+                    this.queryResult = response.data
+                })
+                .catch(error => {});
+        }
+    
+        get gridTemplate() {
+            return `grid-template: repeat(${this.rows}, 1fr) / repeat(${this.columns}, 1fr);`;
+        }
+    
 
 }

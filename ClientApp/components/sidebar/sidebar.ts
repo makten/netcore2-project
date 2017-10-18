@@ -28,7 +28,7 @@ export default class DashboardComponent extends Vue {
 
   themeColor: any = {color:'#35475e', name:'Default',  text: "#E3F2FD"};
 
-  logo: string = 'Hafiz Abass App';
+  logo: string = 'Eile Mit Weile';
 
   windowHeight: number = 0;
 

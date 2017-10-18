@@ -9,11 +9,6 @@
  *
  */
 
-* {
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body {
     min-height: 100%;
     min-width: 100%;
@@ -30,56 +25,34 @@ ul li {
     padding: 0;
 }
 
-.material-icons.md-18 {
-    font-size: 18px;
-}
+.material-icons.md-18 { font-size: 18px; }
 
-.material-icons.md-24 {
-    font-size: 24px;
-}
+.material-icons.md-24 { font-size: 24px; }
 
-.material-icons.md-36 {
-    font-size: 36px;
-}
+.material-icons.md-36 { font-size: 36px; }
 
-.material-icons.md-48 {
-    font-size: 48px;
-}
+.material-icons.md-48 { font-size: 48px; }
 
 
 /* Rules for using icons as black on a light background. */
 
-.material-icons.md-dark {
-    color: rgba(0, 0, 0, 0.54);
-}
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 
-.material-icons.md-dark.md-inactive {
-    color: rgba(0, 0, 0, 0.26);
-}
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
 
 /* Rules for using icons as white on a dark background. */
 
-.material-icons.md-light {
-    color: rgba(255, 255, 255, 1);
-}
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
 
-.material-icons.md-light.md-inactive {
-    color: rgba(255, 255, 255, 0.3);
-}
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 .material-icons,
-.icon-text {
-    vertical-align: middle;
-}
+.icon-text { vertical-align: middle; }
 
-a {
-    text-decoration: none;
-}
+a { text-decoration: none; }
 
-.chart a {
-    text-decoration: none !important;
-}
+.chart a { text-decoration: none !important; }
 
 .header {
     position: absolute;
@@ -116,9 +89,7 @@ a {
     color: #fff;
 }
 
-.header .logo {
-    float: left;
-}
+.header .logo { float: left; }
 
 .header .logo {
     height: 44px;
@@ -128,9 +99,7 @@ a {
     color: #233245;
 }
 
-.logo i {
-    font-size: 22px;
-}
+.logo i { font-size: 22px; }
 
 .logo span {
     margin-left: 5px;
@@ -155,22 +124,14 @@ span:after {
     position: absolute;
 }
 
-.nav-trigger span {
-    top: 50%;
-}
+.nav-trigger span { top: 50%; }
 
 .nav-trigger span:before,
-.nav-trigger span:after {
-    content: '';
-}
+.nav-trigger span:after { content: ''; }
 
-.nav-trigger span:before {
-    top: -6px;
-}
+.nav-trigger span:before { top: -6px; }
 
-.nav-trigger span:after {
-    top: 6px;
-}
+.nav-trigger span:after { top: 6px; }
 
 
 /* side navigation styles */
@@ -186,9 +147,7 @@ span:after {
     top: 0px;
 }
 
-.side-nav.visible {
-    display: block;
-}
+.side-nav.visible { display: block; }
 
 .side-nav ul {
     margin: 0;
@@ -219,9 +178,7 @@ span:after {
     padding: 10px;
 }
 
-.side-nav ul li:hover {
-    background-color: #566C9D;
-}
+.side-nav ul li:hover { background-color: #566C9D; }
 
 .side-nav ul li i {
     color: #F9FAFA;
@@ -249,67 +206,51 @@ span:after {
         background-color: #D7D3D3;
         /* z-index: 1; */
     }
-    .header .logo {
-        display: none;
-    }
-    .nav-trigger {
-        display: none;
-    }
+
+    .header .logo { display: none; }
+
+    .nav-trigger { display: none; }
+
     .nav-trigger span,
     .nav-trigger span:before,
-    span:after {
-        background-color: #fff;
-    }
+    span:after { background-color: #fff; }
+
     .side-nav {
         display: block;
         width: 90px;
         /* z-index: 2; */
     }
-    .side-nav ul li span:nth-child(2) {
-        display: none;
-    }
-    .side-nav .logo i {
-        padding-left: 12px;
-    }
-    .side-nav .logo span {
-        display: none;
-    }
-    .side-nav ul li i {
-        font-size: 26px;
-    }
-    .side-nav ul li a {
-        text-align: center;
-    }
-    .main-content {
-        margin-left: 80px;
-    }
+
+    .side-nav ul li span:nth-child(2) { display: none; }
+
+    .side-nav .logo i { padding-left: 12px; }
+
+    .side-nav .logo span { display: none; }
+
+    .side-nav ul li i { font-size: 26px; }
+
+    .side-nav ul li a { text-align: center; }
+
+    .main-content { margin-left: 80px; }
 }
 
 
 /* set element styles for desktop */
 
 @media screen and (min-width: 800px) {
-    .side-nav {
-        width: 200px;
-    }
-    .side-nav ul li span:nth-child(2) {
-        display: inline-block;
-    }
-    .side-nav ul li i {
-        font-size: 16px;
-    }
-    .side-nav ul li a {
-        text-align: left;
-    }
-    .side-nav .logo i {
-        padding-left: 0;
-    }
-    .side-nav .logo span {
-        display: inline-block;
-    }
-    .main-content {
-        margin-left: 200px;
-    }
+    .side-nav { width: 200px; }
+
+    .side-nav ul li span:nth-child(2) { display: inline-block; }
+
+    .side-nav ul li i { font-size: 16px; }
+
+    .side-nav ul li a { text-align: left; }
+
+    .side-nav .logo i { padding-left: 0; }
+
+    .side-nav .logo span { display: inline-block; }
+
+    .main-content { margin-left: 200px; }
 }
 
 
@@ -341,9 +282,7 @@ span:after {
     font-weight: 700;
 }
 
-.widget .chart {
-    padding: 5px;
-}
+.widget .chart { padding: 5px; }
 
 #bam h1 {
     animation: typing 2s steps(28), blinking .6s infinite alternate;
@@ -355,16 +294,13 @@ span:after {
 }
 
 @keyframes typing {
-    from {
-        width: 0;
-    }
-    to {}
+    from { width: 0; }
+
+    to { }
 }
 
 @keyframes blinking {
-    50% {
-        border-color: transparent;
-    }
+    50% { border-color: transparent; }
 }
 
 .fadeIn {
@@ -373,17 +309,12 @@ span:after {
     animation-fill-mode: both;
 }
 
-.wait-2s {
-    animation-delay: 2s;
-}
+.wait-2s { animation-delay: 2s; }
 
 @keyframes fadingIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+
+    to { opacity: 1; }
 }
 
 
@@ -394,13 +325,9 @@ span:after {
     margin: 0;
 }
 
-.control-label {
-    color: #747070 !important;
-}
+.control-label { color: #747070 !important; }
 
-label {
-    color: #747070 !important;
-}
+label { color: #747070 !important; }
 
 .form-horizontal .form-group {
     margin-bottom: 20px !important;
@@ -413,9 +340,7 @@ label {
     padding-right: 20px;
 }
 
-.select-label {
-    margin-top: -1px !important;
-}
+.select-label { margin-top: -1px !important; }
 
 .preview-list ul {
     padding: 0px;
@@ -445,9 +370,7 @@ label {
     font-family: consolas;
 }
 
-.searchtable tr:hover {
-    cursor: pointer;
-}
+.searchtable tr:hover { cursor: pointer; }
 
 .searchbox {
     background: #FBEFAB !important;

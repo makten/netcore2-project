@@ -1,27 +1,19 @@
 <template>
 
-    <!-- <div class="col-xs-12" style="text-align: center;"> -->
-        <div class="main">
+    <div>
+        <header-component :auth="auth" :authenticated="authenticated" v-if="!fullScreen"></header-component>
+        <sidebar-component v-if="!fullScreen"></sidebar-component>
 
-            <div class="widget">
-                <div class="title">Dashboard</div>
-                <div class="chart">
-                    <div class="col-md-6 col-md-offset-3" id="bam">
-                        <h1>Something Amazing Is Coming Soon!</h1>
-                        <p class="fadeIn wait-2s">You Will Love it</p>
-                    </div>
-                </div>
-            </div> 
+        <div class="main-content">
 
-            <div class="widget">
-                <div class="title">Dashboard</div>
-                <div class="chart">
-                    <h3> Total available vehicles {{ queryResult.totalItems }} </h3>
-                    <h3> Total available vehicles {{ queryResult.totalItems }} </h3>
-                </div>
-            </div> 
-       
-     </div> 
+            <div class="content">
+                <router-view :auth="auth" :authenticated="authenticated">
+                </router-view>
+            </div>
+
+        </div>
+        <!-- <footer-component></footer-component> -->
+    </div>
 </template>
 
 <script src="./home.ts"></script>

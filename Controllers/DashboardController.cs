@@ -13,9 +13,11 @@ namespace dashboard.Controllers
 {
 
     //Apply to all routes
-    [Route("/api/dashboard")]
+    // [Route("/api/dashboard")]
     public class DashboardController : Controller
     {
+
+
         //TO DO
         //Get total number of cars - per month, year
         // Get vehicle make counts
@@ -28,6 +30,12 @@ namespace dashboard.Controllers
         {
             this.mapper = mapper;
             this.repository = repository;
+        }
+
+        [Route("/dashboard/home")]
+        public IActionResult Index()
+        {
+            return View();
         }
 
 

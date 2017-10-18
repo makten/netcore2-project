@@ -11,6 +11,12 @@ namespace dashboard.Persistence
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<UpcomingEvent> UpcomingEvents { get; set; }
+        public DbSet<Goal> Goals { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<TeamEnvironment> TeamEnvironments { get; set; }
+        public DbSet<ClientGroup> ClientGroups { get; set; }
         
         public DashboardDbContext(DbContextOptions<DashboardDbContext> options)
             :base(options)

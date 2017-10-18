@@ -15,6 +15,7 @@ using dashboard.Persistence;
 using dashboard.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using dashboard_app.Controllers;
+using Newtonsoft.Json;
 
 namespace dashboard_app
 {
@@ -34,6 +35,10 @@ namespace dashboard_app
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
 
             // Repository Injections
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
+            services.AddScoped<ITeamEnvironmentRepository, TeamEnvironmentRepository>();
+            services.AddScoped<IClientGroupRepository, ClientGroupRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPhotosRepository, PhotosRepository>();
@@ -56,6 +61,11 @@ namespace dashboard_app
                 options.Audience = "https://api.dashboardapp.com";
                 options.Authority = "https://dashapp.eu.auth0.com/";
                 // options.RequireHttpsMetadata = false;                
+            });
+
+            //Fix for Circular Reference .. Ïnclude(v => v.Suff)
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddMvc();

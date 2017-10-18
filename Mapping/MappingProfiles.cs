@@ -11,6 +11,14 @@ namespace dashboard.Mapping
         public MappingProfiles()
         {
             //Domain to API Resource
+            CreateMap<Team, TeamResource>();
+            CreateMap<TeamMember, TeamMemberResource>();
+            CreateMap<Goal, GoalResource>();
+            CreateMap<TeamEnvironment, TeamEnvironmentResource>();
+            CreateMap<UpcomingEvent, UpcomingEventResource>();
+            CreateMap<ClientGroup, ClientGroupResource>();
+
+
             CreateMap<Photo, PhotoResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>)); //Special mapping for Generic types
             CreateMap<Make, MakeResource>();
