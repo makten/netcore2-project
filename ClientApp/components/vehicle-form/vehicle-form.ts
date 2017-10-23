@@ -191,28 +191,28 @@ export default class VehicleFormComponent extends Vue {
 
     validateBeforeSubmit() {
 
-        this.$validator.validateAll().then(result => {
-            if (result) {
-                this.sending = true;
-                let url = this.vehicleForm.formMode.method === 'put' ? `/api/vehicles/${this.vehicleForm.id}` : `/api/vehicles`
+        // this.$validator.validateAll().then(result => {
+        //     if (result) {
+        //         this.sending = true;
+        //         let url = this.vehicleForm.formMode.method === 'put' ? `/api/vehicles/${this.vehicleForm.id}` : `/api/vehicles`
 
-                this.vehicleForm[this.vehicleForm.formMode.method](url)
-                    .then(data => {
+        //         this.vehicleForm[this.vehicleForm.formMode.method](url)
+        //             .then(data => {
                         
-                        this.queryResult.push(data)
+        //                 this.queryResult.push(data)
                         
-                        this.sending = false;
-                        this.$root.$router.push('/vehicle/new');
-                        this.createEdit = false;
-                    })
-                    .catch(errors => {
-                        this.sending = false;
-                        this.errorBag = []
-                        this.errorBag.push(errors)
-                    });
-            }
+        //                 this.sending = false;
+        //                 this.$root.$router.push('/vehicle/new');
+        //                 this.createEdit = false;
+        //             })
+        //             .catch(errors => {
+        //                 this.sending = false;
+        //                 this.errorBag = []
+        //                 this.errorBag.push(errors)
+        //             });
+        //     }
 
-        });
+        // });
     }
 
 

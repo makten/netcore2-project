@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 
 namespace dashboard.Core
@@ -6,8 +5,6 @@ namespace dashboard.Core
 
     public interface IUnitOfWork
     {
-
         Task CompleteAsync();
-
     }
 }

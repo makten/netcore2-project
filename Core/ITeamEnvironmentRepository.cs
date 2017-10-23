@@ -1,8 +1,6 @@
-﻿using System;
+﻿using dashboard.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using dashboard.Core.Models;
 
 namespace dashboard.Core
 {

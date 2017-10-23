@@ -1,7 +1,6 @@
+using dashboard.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using dashboard.Core.Models;
-using Microsoft.AspNetCore.Hosting;
 
 namespace dashboard.Core
 {

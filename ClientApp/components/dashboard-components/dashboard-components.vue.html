@@ -2,11 +2,12 @@
     <div class="wrapper">
         <dashboard-component columns="6" rows="3">
             <member-component></member-component>          
+            <weather-component :weather-city="weatherCity"></weather-component>          
             
             <div class="tile team-music">Team Music</div>
-            <div class="tile weather-date">Weather</div>
             <div class="tile upcoming-events">Upcoming</div>
-            <div class="tile jenkins-pipeline">Jenkins Stats</div>
+            
+            <jenkins-component></jenkins-component>
 
             <environment-component></environment-component>   
 

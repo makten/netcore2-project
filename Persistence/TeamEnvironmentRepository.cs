@@ -17,7 +17,6 @@ namespace dashboard.Persistence
             _context = context;
         }
 
-
         public Task<TeamEnvironment> GetTeamEvironmentById(int id)
         {
             return _context.TeamEnvironments.FindAsync(id);

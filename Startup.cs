@@ -33,6 +33,7 @@ namespace dashboard_app
         {
 			
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+            // services.AddCors();
 
             // Repository Injections
             services.AddScoped<ITeamRepository, TeamRepository>();
@@ -63,7 +64,7 @@ namespace dashboard_app
                 // options.RequireHttpsMetadata = false;                
             });
 
-            //Fix for Circular Reference .. Ïnclude(v => v.Suff)
+            //Fix for Circular Reference .. ï¿½nclude(v => v.Suff)
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });

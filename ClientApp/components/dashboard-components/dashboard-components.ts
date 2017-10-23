@@ -10,6 +10,7 @@ import * as globals from '../../globals';
         environmentComponent: require('../client-group/client-group.vue.html'),
         dashboardComponent: require('../dashboard/dashboard.vue.html'),
         weatherComponent: require('../weather/weather.vue.html'),
+        jenkinsComponent: require('../jenkins/jenkins-stats.vue.html'),
         FooterComponent: require('../footer/footer.vue.html'),
         HomeComponent: require('../home/home.vue.html'),
 
@@ -22,6 +23,7 @@ export default class MainDashboardComponent extends Vue {
     login: any = globals.login;
     logout: any = globals.logout;
     fullScreen: boolean = false;
+    weatherCity: string = 'Deventer';
 
 
 
