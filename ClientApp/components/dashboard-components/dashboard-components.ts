@@ -11,6 +11,7 @@ import * as globals from '../../globals';
         dashboardComponent: require('../dashboard/dashboard.vue.html'),
         weatherComponent: require('../weather/weather.vue.html'),
         jenkinsComponent: require('../jenkins/jenkins-stats.vue.html'),
+        spotifyComponent: require('../spotify/spotify.vue.html'),
         FooterComponent: require('../footer/footer.vue.html'),
         HomeComponent: require('../home/home.vue.html'),
 
@@ -27,8 +28,9 @@ export default class MainDashboardComponent extends Vue {
 
 
 
-    mounted() {        
-        
+    mounted() {
+
+
         globals.eventBroadcaster.$on('changeRoute', (routeLink: any) => {
             this.$root.$router.push(routeLink)
         })
@@ -37,4 +39,6 @@ export default class MainDashboardComponent extends Vue {
             this.authenticated = authState.authenticated
         })
     }
+
+   
 }

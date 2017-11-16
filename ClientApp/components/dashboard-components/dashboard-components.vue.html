@@ -1,15 +1,16 @@
 <template>
     <div class="wrapper">
         <dashboard-component columns="6" rows="3">
-            <member-component></member-component>          
-            <weather-component :weather-city="weatherCity"></weather-component>          
+            <member-component></member-component>
+            <weather-component :weather-city="weatherCity"></weather-component>
+            <spotify-component v-once></spotify-component>
+
             
-            <div class="tile team-music">Team Music</div>
             <div class="tile upcoming-events">Upcoming</div>
-            
+
             <jenkins-component></jenkins-component>
 
-            <environment-component></environment-component>   
+            <environment-component></environment-component>
 
         </dashboard-component>
     </div>

@@ -26,6 +26,7 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
+    "@aspnet/signalr-client": "^1.0.0-alpha2-final",
     "@types/bootstrap": "^3.3.36",
     "@types/chartjs": "0.0.30",
     "@types/d3": "^4.10.0",
@@ -42,10 +43,12 @@
     "lodash": "^4.17.4",
     "moment-js": "^1.1.15",
     "moment-timezone": "^0.5.13",
+    "spotify-web-api-node": "^2.5.0",
     "vee-validate": "^2.0.0-rc.8",
     "velocity-animate": "^1.5.0",
     "vue-chartjs": "^2.8.2",
     "vue-select": "^2.2.0",
+    "vue-spotify": "^1.0.2",
     "vue2-notify": "^1.1.4"
   }
 }

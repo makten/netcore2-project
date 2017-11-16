@@ -14,3 +14,12 @@ const  authObj = new AuthService();
 export const  { login, logout, authenticated, authNotifier } = authObj;
 
 export const auth = authObj;
+
+export const scopes = [
+    'user-read-private', 'user-read-email',
+    'user-read-currently-playing', 'user-read-playback-state',
+    'user-modify-playback-state'
+],
+    redirectUri = 'http://localhost:8080/callback',
+    clientId = '1b577309cb494275ada4fe2f3ebce5dc',
+    state = '';

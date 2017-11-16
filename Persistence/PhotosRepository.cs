@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using dashboard.Core;
 using dashboard.Core.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace dashboard.Persistence

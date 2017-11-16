@@ -32,7 +32,7 @@ namespace dashboard.Controllers
             this.repository = repository;
         }
 
-        [Route("/dashboard/home")]
+        [Route("/")]
         public IActionResult Index()
         {
             return View();

@@ -16,6 +16,7 @@ using dashboard.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using dashboard_app.Controllers;
 using Newtonsoft.Json;
+using dashboard.Hubs;
 
 namespace dashboard_app
 {
@@ -31,15 +32,26 @@ namespace dashboard_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			
+
+
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
-            // services.AddCors();
+            services.Configure<SpotifySettings>(Configuration.GetSection("SpotifySettings"));
+            services.AddCors(option =>
+            {
+                option.AddPolicy("AllowEverything",
+                    policy => policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
+            services.AddSignalR();
 
             // Repository Injections
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
             services.AddScoped<ITeamEnvironmentRepository, TeamEnvironmentRepository>();
             services.AddScoped<IClientGroupRepository, ClientGroupRepository>();
+            services.AddScoped<ISpotifyRepository, SpotifyRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPhotosRepository, PhotosRepository>();
@@ -50,22 +62,25 @@ namespace dashboard_app
             //Dbcontext service -- Db connection
             services.AddDbContext<DashboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-            
-            services.AddAuthorization(options => {
+            services.AddAuthorization(options =>
+            {
                 // options.AddPolicy("RequireAdminRole", policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
                 options.AddPolicy(Roles.RequireAdminRole, policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
             })
-            .AddAuthentication(options => {
-                  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            .AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer( options => {
+            .AddJwtBearer(options =>
+            {
                 options.Audience = "https://api.dashboardapp.com";
                 options.Authority = "https://dashapp.eu.auth0.com/";
                 // options.RequireHttpsMetadata = false;                
             });
 
             //Fix for Circular Reference .. �nclude(v => v.Suff)
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
@@ -80,7 +95,8 @@ namespace dashboard_app
                 app.UseDeveloperExceptionPage();
 
                 //Workaround for HRM (text/mime) problem --------------- 
-                app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
                     HotModuleReplacement = true,
                     HotModuleReplacementEndpoint = "/dist/_webpack_hrm"
                 });
@@ -96,8 +112,8 @@ namespace dashboard_app
             }
 
             app.UseStaticFiles();
-			
-			app.UseAuthentication();            
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -111,4 +127,5 @@ namespace dashboard_app
             });
         }
     }
+
 }

@@ -1,0 +1,38 @@
+.user-profile{
+
+}
+
+
+
+.team-music {
+    position: relative;
+}
+
+.background-art img {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    z-index: 1;
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: 1;
+}
+
+.user-avatar{
+    max-height: 80px;
+    max-width: 80px;
+    border-radius: 50%;
+    z-index: 1000;
+    position: absolute;
+    top: -200;
+}

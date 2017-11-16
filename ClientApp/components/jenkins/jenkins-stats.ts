@@ -35,11 +35,11 @@ export default class JenkinsComponent extends Vue {
 
     created() {        
         
-        this.refreshTime();
-        setInterval(this.refreshTime, 1000);
+        // this.refreshTime();
+        // setInterval(this.refreshTime, 1000);
 
-        this.fetchStatistics();
-        setInterval(this.fetchStatistics, 15 * 60 * 1000);
+        // this.fetchStatistics();
+        // setInterval(this.fetchStatistics, 15 * 60 * 1000);
 
     }
 
