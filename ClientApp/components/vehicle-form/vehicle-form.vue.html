@@ -5,9 +5,11 @@
             
             <div class="title">Create Vehicle</div>
             <div class="chart">
+                
+                <button @click="testHub">Testfff</button>
 
-                <div class="error-block error-bag" v-if="errorBag.length > 0">  
-                    <p v-for="er in errorBag">{{er}}</p>                  
+                <div class="error-block error-bag" v-if="errorBag.length > 0">
+                    <p v-for="er in errorBag">{{er}}</p>
                     <p>There are some errors! Please correct them and proceed.</p>
                 </div>
 
@@ -17,11 +19,11 @@
                     <div class="form-group">
                         <div class="input-group col-md-4">
                             <label for="make">Make</label>
-                            <select v-validate="'required'" name="make" @change="changeVehicle" v-model="vehicleForm.makeId" id="make" class="form-control">                    
+                            <select v-validate="'required'" name="make" @change="changeVehicle" v-model="vehicleForm.makeId" id="make" class="form-control">
                                 <option></option>
-                                <option v-for="make in makes" :value="make.id">{{ make.name }}</option>                           
+                                <option v-for="make in makes" :value="make.id">{{ make.name }}</option>
                             </select>
-                            
+
                         </div>
                         <span v-show="errors.has('make')" class="help is-danger">
                             <i class="fa fa-warning"></i>
@@ -32,11 +34,11 @@
                     <div class="form-group" v-if="models.length">
                         <div class="input-group col-md-4">
                             <label for="models">Model</label>
-                            <select v-validate="'required'" name="models" id="models" class="form-control" v-model="vehicleForm.modelId">   
-                                <option></option>                         
+                            <select v-validate="'required'" name="models" id="models" class="form-control" v-model="vehicleForm.modelId">
+                                <option></option>
                                 <option v-for="model in models" :value="model.id">{{ model.name }}</option>
-                            </select>                           
-                            
+                            </select>
+
                         </div>
                         <span v-show="errors.has('models')" class="help is-danger">
                             <i class="fa fa-warning"></i>
@@ -49,13 +51,13 @@
 
                         <label for="isRegistered" class="radio-inline">
                             <input v-validate="'required'"
-                            v-model="vehicleForm.isRegistered" 
-                            value="true" id="isRegistered" type="radio" name="registered"> Yes
+                                   v-model="vehicleForm.isRegistered"
+                                   value="true" id="isRegistered" type="radio" name="registered"> Yes
                         </label>
                         <label for="notRegistered" class="radio-inline">
                             <input v-model="vehicleForm.isRegistered" value="false" id="notRegistered" type="radio" name="registered"> No
                         </label><br/>
-                      
+
                         <span v-show="errors.has('registered')" class="help is-danger">
                             <i class="fa fa-warning"></i>
                             {{ errors.first('registered') }}
@@ -67,15 +69,14 @@
                     <div class="form-group">
                         <div class="checkbox" v-for="feature in features">
                             <label :for="'feature'+feature.id">
-                                <input v-model="vehicleForm.features" :id="'feature'+feature.id" 
-                                type="checkbox" :value="feature.id" 
-                                class="checkbox"
-                                name="features"
-                                v-validate="'required'"                                                              
-                                > {{ feature.name }}
+                                <input v-model="vehicleForm.features" :id="'feature'+feature.id"
+                                       type="checkbox" :value="feature.id"
+                                       class="checkbox"
+                                       name="features"
+                                       v-validate="'required'"> {{ feature.name }}
                             </label>
                         </div>
-                       
+
                         <span v-show="errors.has('features')" class="help is-danger">
                             <i class="fa fa-warning"></i>
                             {{ errors.first('features') }}
@@ -88,8 +89,8 @@
                         <div class="input-group col-md-6">
                             <label for="name">Name</label>
                             <input v-model="vehicleForm.contact.name" type="text" id="name" name="name" v-validate="'required|:max:2'" :class="{'input': true, 'is-danger': errors.has('name') }"
-                                class="form-control input-sm">                           
-                            
+                                   class="form-control input-sm">
+
                         </div>
                         <span v-show="errors.has('name')" class="help is-danger">
                             <i class="fa fa-warning"></i>
@@ -101,8 +102,8 @@
                         <div class="input-group col-md-6">
                             <label for="email">Email</label>
                             <input v-model="vehicleForm.contact.email" v-validate="'required|email'" name="email" type="text" id="email" class="form-control input-sm"
-                                :class="{'input': true, 'is-danger': errors.has('email') }">                           
-                            
+                                   :class="{'input': true, 'is-danger': errors.has('email') }">
+
                         </div>
 
                         <span v-show="errors.has('email')" class="help is-danger">
@@ -116,8 +117,8 @@
                         <div class="input-group col-md-6">
                             <label for="phone">Phone</label>
                             <input v-model="vehicleForm.contact.phone" type="text" id="phone" v-validate="'required|numeric|max:13'" name="phone" :class="{'input': true, 'is-danger': errors.has('phone')}"
-                                class="form-control input-sm">                           
-                            
+                                   class="form-control input-sm">
+
                         </div>
 
                         <span v-show="errors.has('phone')" class="help is-danger">
@@ -130,7 +131,7 @@
                     <button v-if="vehicleForm.id" @click="deleteVehicle(vehicleForm.id)" type="button" class="btn btn-danger">Delete</button>
 
                 </form>
-                
+
             </div>
         </div>
 

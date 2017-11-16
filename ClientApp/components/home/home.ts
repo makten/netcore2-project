@@ -10,7 +10,8 @@ import * as globals from '../../globals';
         HeaderComponent: require('../header/header.vue.html'),
         SidebarComponent: require('../sidebar/sidebar.vue.html'),
         FooterComponent: require('../footer/footer.vue.html'),
-        HomeComponent: require('../home/home.vue.html'),
+        DashboardComponent: require('../dashboard/dashboard.vue.html'),
+        // HomeComponent: require('../home/home.vue.html'),
 
     }
 })

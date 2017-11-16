@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace dashboard.Persistence
+﻿namespace dashboard.Persistence
 {
     public abstract class DbRepository
     {

@@ -21,5 +21,6 @@ namespace dashboard.Core.Models
         public DateTime? GoalStart { get; set; }
         public DateTime? GoalEnd { get; set; }
         public int TeamMemberId { get; set; }
+        public TeamMember TeamMember { get; set; }
     }
 }

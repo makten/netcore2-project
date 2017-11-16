@@ -34,8 +34,6 @@ export default class WeatherComponent extends Vue {
     }
 
     created() {
-
-        alert(encodeURI("Stabilisatie-teststraat-ING"));
         
         this.refreshTime();
         setInterval(this.refreshTime, 1000);
@@ -55,13 +53,6 @@ export default class WeatherComponent extends Vue {
 
         this.weather.temperature = conditions.temp;
         this.weather.iconClass = `wi-yahoo-${conditions.code}`;
-    }
-
-
-    getEnvironments() {
-        axios.get('/api/environments').then(response => {
-            // this.environments = response.data;
-        }).catch(err => { })
     }
 
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using dashboard.Controllers.Resources;
 using dashboard.Core;
 using dashboard.Core.Models;
 using Microsoft.EntityFrameworkCore;

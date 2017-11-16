@@ -16,6 +16,7 @@ using dashboard.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using dashboard_app.Controllers;
 using Newtonsoft.Json;
+using dashboard.Hubs;
 
 namespace dashboard_app
 {
@@ -31,15 +32,25 @@ namespace dashboard_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			
+            services.AddCors(option =>
+            {
+                option.AddPolicy("AllowEverything",
+                    policy => policy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+            services.AddSignalR();
+
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
-            // services.AddCors();
+            services.Configure<SpotifySettings>(Configuration.GetSection("SpotifySettings"));
 
             // Repository Injections
             services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IGoalRepository, GoalRepository>();
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
             services.AddScoped<ITeamEnvironmentRepository, TeamEnvironmentRepository>();
             services.AddScoped<IClientGroupRepository, ClientGroupRepository>();
+            services.AddScoped<ISpotifyRepository, SpotifyRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPhotosRepository, PhotosRepository>();
@@ -49,7 +60,6 @@ namespace dashboard_app
 
             //Dbcontext service -- Db connection
             services.AddDbContext<DashboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-
             
             services.AddAuthorization(options => {
                 // options.AddPolicy("RequireAdminRole", policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
@@ -95,10 +105,16 @@ namespace dashboard_app
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCors("AllowEverything");
+
             app.UseStaticFiles();
 			
-			app.UseAuthentication();            
+			app.UseAuthentication();      
 
+            app.UseSignalR(routes => {
+                routes.MapHub<DashboardHub>("player");
+            });
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -109,6 +125,8 @@ namespace dashboard_app
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
         }
     }
+    
 }

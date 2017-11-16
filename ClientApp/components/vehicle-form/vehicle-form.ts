@@ -80,6 +80,10 @@ export default class VehicleFormComponent extends Vue {
 
     }
 
+    testHub() {
+        axios.get('/api/vehicles/test').then(() => {}).catch(() => {});
+    }
+
     //Pagination event handler
     pageOneChanged(pageNum: any) {
         this.query.page = pageNum;

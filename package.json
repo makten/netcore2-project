@@ -42,10 +42,12 @@
     "lodash": "^4.17.4",
     "moment-js": "^1.1.15",
     "moment-timezone": "^0.5.13",
+    "spotify-web-api-node": "^2.5.0",
     "vee-validate": "^2.0.0-rc.8",
     "velocity-animate": "^1.5.0",
     "vue-chartjs": "^2.8.2",
     "vue-select": "^2.2.0",
+    "vue-spotify": "^1.0.2",
     "vue2-notify": "^1.1.4"
   }
 }

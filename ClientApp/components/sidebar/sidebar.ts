@@ -12,18 +12,13 @@ export default class DashboardComponent extends Vue {
   userProfile: any = {};
   linkList: any[] = [
     { icon: '<i class="material-icons md-24" aria-hidden="true">dashboard</i>', title: 'Dashboard', link: '/', active: true },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">local_mall</i>', title: 'My Purchases', link: '/fetchdata', active: false },    
-    // { icon: '<i class="material-icons md-24" aria-hidden="true">directions_car</i>', title: 'Vehicles', link: '/vehicles', active: false },    
-    { icon: '<i class="material-icons md-24" aria-hidden="true">note_add</i>', title: 'Create Vehicle', link: '/vehicle/new', active: false },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">help</i>', title: 'FAQ', link: '/vehicles', active: false },
-    { icon: '<i class="material-icons md-24" aria-hidden="true">info</i>', title: 'About', link: '/vehicle/new', active: false },
+    { icon: '<i class="material-icons md-24" aria-hidden="true">note_add</i>', title: 'Create Page', link: '/vehicle/new', active: false },
   ];
 
   forAdmin: any[] = [
     { icon: '<i class="material-icons md-24" aria-hidden="true">business</i>', title: 'Departments', link: '/#', active: false },
     { icon: '<i class="material-icons md-24" aria-hidden="true">people</i>', title: 'Employees', link: '/buildModel', active: false },
     { icon: '<i class="material-icons md-24" aria-hidden="true">security</i>', title: 'Roles ', link: '/#', active: false }
-
   ];
 
   themeColor: any = {color:'#35475e', name:'Default',  text: "#E3F2FD"};

@@ -247,3 +247,21 @@ h1 { color: var(--gray-light); }
     color:#525757;
 }
 
+.alert-info{
+    font-size: 10px;
+    padding: 5px;
+}
+
+.removeTodo {
+    padding: 4px; 
+    font-size: 20px; 
+    font-weight: bolder; 
+    margin-left: 12px; 
+    color: #FF3C00;  
+}
+
+.todoDone {
+    text-decoration: line-through !important;
+    color: #a2a3a3;
+}
+

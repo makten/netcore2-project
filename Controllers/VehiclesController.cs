@@ -9,7 +9,9 @@ using dashboard.Core.Models;
 using dashboard.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.ObjectModel;
+using dashboard.Hubs;
 using dashboard_app.Controllers;
+using Microsoft.AspNetCore.SignalR;
 
 namespace dashboard.Controllers
 {
@@ -19,18 +21,30 @@ namespace dashboard.Controllers
     {
         private readonly IMapper mapper;
         private readonly IVehicleRepository repository;
+        private readonly IHubContext<DashboardHub> _dashboarHubContext;
         private readonly IUnitOfWork unitOfWork;
-        public VehiclesController(IMapper mapper, IVehicleRepository repository, IUnitOfWork unitOfWork)
+        public VehiclesController(IHubContext<DashboardHub> dashboarHubContext, IMapper mapper, IVehicleRepository repository, IUnitOfWork unitOfWork)
         {
+            _dashboarHubContext = dashboarHubContext;
             this.unitOfWork = unitOfWork;
             this.repository = repository;
             this.mapper = mapper;
         }
 
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            await _dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
+
+            return Ok();
+        }
 
         [HttpGet]
         public async Task<QueryResultResource<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
+            await _dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
+
+
             var filter = mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);
             
             var queryResult = await repository.GetVehicles(filter);            
