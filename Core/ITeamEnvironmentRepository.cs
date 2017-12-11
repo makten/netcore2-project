@@ -10,6 +10,7 @@ namespace dashboard.Core
         Task<TeamEnvironment> GetTeamEvironmentByIdWithRelations(int id);
 
         Task<IEnumerable<TeamEnvironment>> GetTeamEvironments(int teamId);
+        Task<IEnumerable<TeamEnvironment>> GetTeamEvironments();
 
         void Add(TeamEnvironment environment);
         void Remove(TeamEnvironment environment);

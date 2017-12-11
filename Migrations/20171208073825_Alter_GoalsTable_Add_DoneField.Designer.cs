@@ -11,9 +11,10 @@ using System;
 namespace Dashboard.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class DashboardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171208073825_Alter_GoalsTable_Add_DoneField")]
+    partial class Alter_GoalsTable_Add_DoneField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

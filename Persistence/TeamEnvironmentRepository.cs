@@ -36,6 +36,13 @@ namespace dashboard.Persistence
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<TeamEnvironment>> GetTeamEvironments()
+        {
+            return await _context.TeamEnvironments
+                .Include(t => t.ClientGroup)
+                .ToListAsync();
+        }
+
         public void Add(TeamEnvironment environment)
         {
             _context.Add(environment);
@@ -43,7 +50,7 @@ namespace dashboard.Persistence
 
         public void Remove(TeamEnvironment environment)
         {
-            _context.Add(environment);
+            _context.Remove(environment);
         }
     }
 }

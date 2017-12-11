@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using dashboard.Core.Models;
-
-namespace dashboard.Core.Models
+﻿namespace dashboard.Core.Models
 {
     public class SpotifyImage : BaseModel
     {

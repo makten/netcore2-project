@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using dashboard.Controllers.Resources;
 using Microsoft.AspNetCore.SignalR;
 
 namespace dashboard.Hubs
@@ -10,7 +8,7 @@ namespace dashboard.Hubs
     {
         public Task Send(string message)
         {
-            return Clients.All.InvokeAsync("TestSend", message);
+            return Clients.All.InvokeAsync("PlayerUpdate", message);
         }
     }
 }

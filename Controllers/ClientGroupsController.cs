@@ -9,7 +9,7 @@ using dashboard.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dashboard_app.Controllers
+namespace dashboard.Controllers
 {
     [Route("/api/clientgroups")]
     public class ClientGroupsController : Controller

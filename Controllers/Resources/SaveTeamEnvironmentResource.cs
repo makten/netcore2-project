@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace dashboard.Core.Models
+namespace dashboard.Controllers.Resources
 {
-   [Table("TeamEnvironments")]
-    public class TeamEnvironment
+    public class SaveTeamEnvironmentResource
     {
-        public int Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
@@ -15,6 +14,7 @@ namespace dashboard.Core.Models
         [StringLength(255)]
         public string ExtraDetails { get; set; }
         public int ClientGroupId { get; set; }
-        public ClientGroup ClientGroup { get; set; }
+        public int TeamId { get; set; }
+
     }
 }

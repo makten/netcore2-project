@@ -25,7 +25,7 @@ namespace dashboard.Persistence
 
         public async Task<Goal> GetGoalByIdWithRelations(int id)
         {
-            return await _context.Goals.SingleOrDefaultAsync(g => g.Id == id);
+            return await _context.Goals.Include(g => g.TeamMember).SingleOrDefaultAsync(g => g.Id == id);
         }
 
         public async Task<IEnumerable<Goal>> GetGoals()
@@ -33,14 +33,20 @@ namespace dashboard.Persistence
             return await _context.Goals.Include(g => g.TeamMember).ToListAsync();
         }
 
+        public async Task<IEnumerable<Goal>> GetGoals(int? teamMemberId)
+        {
+            return await _context.Goals.Include(g => g.TeamMember).Where(g => g.TeamMemberId == teamMemberId)
+                .ToListAsync();
+        }
+
         public void Add(Goal goal)
         {
-            throw new NotImplementedException();
+            _context.Goals.Add(goal);
         }
 
         public void Remove(Goal goal)
         {
-            throw new NotImplementedException();
+            _context.Goals.Remove(goal);
         }
     }
 }

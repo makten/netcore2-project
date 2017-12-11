@@ -10,6 +10,7 @@ namespace dashboard.Core
         Task<Goal> GetGoalByIdWithRelations(int id);
 
         Task<IEnumerable<Goal>> GetGoals();
+        Task<IEnumerable<Goal>> GetGoals(int? teamMemberId);
 
         void Add(Goal goal);
         void Remove(Goal goal);

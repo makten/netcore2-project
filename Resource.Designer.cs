@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace dashboard_app {
+namespace dashboard {
     using System;
     
     

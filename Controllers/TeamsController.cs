@@ -9,7 +9,7 @@ using dashboard.Core.Models;
 using dashboard.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.ObjectModel;
-using dashboard_app.Controllers;
+using dashboard.Controllers;
 
 namespace dashboard.Controllers
 {

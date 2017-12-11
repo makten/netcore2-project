@@ -11,9 +11,10 @@ using System;
 namespace Dashboard.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class DashboardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171206101321_ChangeConstraints_ClientGroup_TeamEnvironment")]
+    partial class ChangeConstraints_ClientGroup_TeamEnvironment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,8 +59,6 @@ namespace Dashboard.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(255);
-
-                    b.Property<bool>("Done");
 
                     b.Property<DateTime?>("GoalEnd");
 

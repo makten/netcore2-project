@@ -1,4 +1,4 @@
-namespace dashboard_app.Controllers
+namespace dashboard.Controllers
 {
     public static class Roles
     {

@@ -1,31 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using dashboard.Controllers.Resources;
-using dashboard.Core.Models;
 using dashboard.Core;
-using Microsoft.AspNetCore.Authorization;
-using System.Collections.ObjectModel;
+using dashboard.Core.Models;
 using dashboard.Hubs;
-using dashboard_app.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 
 namespace dashboard.Controllers
 {
-    //Apply to all routes
     [Route("/api/vehicles")]
     public class VehiclesController : Controller
     {
-        private readonly IMapper mapper;
-        private readonly IVehicleRepository repository;
-        private readonly IHubContext<DashboardHub> _dashboarHubContext;
-        private readonly IUnitOfWork unitOfWork;
+        readonly IMapper mapper;
+        readonly IVehicleRepository repository;
+        readonly IHubContext<DashboardHub> dashboarHubContext;
+        readonly IUnitOfWork unitOfWork;
         public VehiclesController(IHubContext<DashboardHub> dashboarHubContext, IMapper mapper, IVehicleRepository repository, IUnitOfWork unitOfWork)
         {
-            _dashboarHubContext = dashboarHubContext;
+            this.dashboarHubContext = dashboarHubContext;
             this.unitOfWork = unitOfWork;
             this.repository = repository;
             this.mapper = mapper;
@@ -34,7 +28,7 @@ namespace dashboard.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> Test()
         {
-            await _dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
+            await dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
 
             return Ok();
         }
@@ -42,22 +36,19 @@ namespace dashboard.Controllers
         [HttpGet]
         public async Task<QueryResultResource<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
-            await _dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
-
+            await dashboarHubContext.Clients.All.InvokeAsync("TestSend", "Message From Vehicle Controller");
 
             var filter = mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);
-            
-            var queryResult = await repository.GetVehicles(filter);            
+
+            var queryResult = await repository.GetVehicles(filter);
 
             return mapper.Map<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>(queryResult);
         }
 
-        
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            //Repository call
+            // Repository call
             var vehicle = await repository.GetVehicle(id);
 
             if (vehicle == null)
@@ -68,7 +59,6 @@ namespace dashboard.Controllers
             var vehicleResource = mapper.Map<Vehicle, VehicleResource>(vehicle);
 
             return Ok(vehicleResource);
-
         }
 
         // [HttpPost("/api/vehicles")]
@@ -92,14 +82,13 @@ namespace dashboard.Controllers
             repository.Add(vehicle);
             await unitOfWork.CompleteAsync();
 
-            //Repository call
+            // Repository call
             vehicle = await repository.GetVehicle(vehicle.Id);
 
             var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
 
             return Ok(result);
         }
-
 
         [HttpPut("{id}")]
         // [Authorize]
@@ -108,7 +97,7 @@ namespace dashboard.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            //Repository call
+            // Repository call
             var vehicle = await repository.GetVehicle(id);
 
             if (vehicle == null)
@@ -126,7 +115,6 @@ namespace dashboard.Controllers
 
             return Ok(result);
         }
-
 
         [HttpDelete("{id}")]
         // [Authorize(Roles.RequireAdminRole)]

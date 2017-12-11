@@ -14,11 +14,11 @@ using AutoMapper;
 using dashboard.Persistence;
 using dashboard.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using dashboard_app.Controllers;
+using dashboard.Controllers;
 using Newtonsoft.Json;
 using dashboard.Hubs;
 
-namespace dashboard_app
+namespace dashboard
 {
     public class Startup
     {
@@ -60,22 +60,26 @@ namespace dashboard_app
 
             //Dbcontext service -- Db connection
             services.AddDbContext<DashboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            
-            services.AddAuthorization(options => {
+
+            services.AddAuthorization(options =>
+            {
                 // options.AddPolicy("RequireAdminRole", policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
                 options.AddPolicy(Roles.RequireAdminRole, policy => policy.RequireClaim("https://dashapp.com/roles", "Admin"));
             })
-            .AddAuthentication(options => {
-                  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            .AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer( options => {
+            .AddJwtBearer(options =>
+            {
                 options.Audience = "https://api.dashboardapp.com";
                 options.Authority = "https://dashapp.eu.auth0.com/";
                 // options.RequireHttpsMetadata = false;                
             });
 
             //Fix for Circular Reference .. �nclude(v => v.Suff)
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
@@ -90,7 +94,8 @@ namespace dashboard_app
                 app.UseDeveloperExceptionPage();
 
                 //Workaround for HRM (text/mime) problem --------------- 
-                app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
                     HotModuleReplacement = true,
                     HotModuleReplacementEndpoint = "/dist/_webpack_hrm"
                 });
@@ -108,13 +113,16 @@ namespace dashboard_app
             app.UseCors("AllowEverything");
 
             app.UseStaticFiles();
-			
-			app.UseAuthentication();      
 
-            app.UseSignalR(routes => {
-                routes.MapHub<DashboardHub>("player");
+            app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<DashboardHub>("PlayerUpdate");
+                routes.MapHub<TeamEnvironmentHub>("teamEnvironmentUpdate");
+                routes.MapHub<GoalsHub>("GoalUpdate");
             });
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -128,5 +136,5 @@ namespace dashboard_app
 
         }
     }
-    
+
 }

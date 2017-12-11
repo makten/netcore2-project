@@ -24,15 +24,12 @@ namespace dashboard.Persistence
         public async Task<ClientGroup> GetClientGroupByIdWithRelations(int id)
         {
             return await _context.ClientGroups
-                .Include(cg => cg.TeamEnvironments)
                 .SingleOrDefaultAsync( cg => cg.Id == id);
         }
 
         public async Task<IEnumerable<ClientGroup>> GetClientGroups()
         {
-            return await _context.ClientGroups
-                .Include(cg => cg.TeamEnvironments)
-                .ToListAsync();
+            return await _context.ClientGroups.ToListAsync();
         }
 
         public void Add(ClientGroup clientGroup)

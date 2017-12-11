@@ -1,3 +1,4 @@
+import { formatDate } from './../../core/helper-util';
 // import { auth } from './../../globals';
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
@@ -5,6 +6,7 @@ import vSelect from 'vue-select';
 import * as _ from 'lodash';
 import axios from 'axios';
 import * as globals from '../../globals';
+import Form from '../../core/Form';
 
 Vue.component('vSelect', vSelect)
 
@@ -12,9 +14,11 @@ Vue.component('vSelect', vSelect)
 export default class DashboardComponent extends Vue {
 
     queryResult: any = {}
+    user: any = { firstName: 'Hafiz', lastName: 'Abass', id: 2, avatar: '', teamId: 1 }
 
-    newTODO: string = "";
-    newEnvironment: string = "";
+
+    newTODO: any = new Form({ title: '', sprintCode: '', description: '', goalStart: '', goalEnd: '', done: false, teamMemberId: '' });
+    newEnvironment: any = new Form({ clientGroupId: '', clientgroup: null, name: '', description: '', extraDetails: '' });
     storyCodes: any[] = [
         "FRC-67121",
         "FRC-37677",
@@ -23,17 +27,12 @@ export default class DashboardComponent extends Vue {
     ];
     selectedCode: string = "";
 
-    todoList: any = [
-        { code: "FRC-67121", name: "Clear cache 2112", completed: false },
-        { code: "FRC-37677", name: "Omtimize code 212", completed: false },
-        { code: "FRC-67885", name: "Configure server", completed: false },
-        { code: "FRC-435343", name: "Fix bug 123", completed: false },
-    ];
+    todoList: any = [];
 
     environments: any = [];
 
     clients: any[] = [];
-    selectClient: string = '';
+    selectClient: any = {};
 
     @Prop()
     rows: number;
@@ -41,9 +40,17 @@ export default class DashboardComponent extends Vue {
     columns: number;
 
     mounted() {
+
+        this.getGoals();
         this.getClients();
+        this.getEnvironments();
     }
 
+    getGoals() {
+        axios.get(`api/goals/${this.user.id}`).then(resp => {
+            this.todoList = resp.data;
+        }).catch(err => { })
+    }
 
     getClients() {
         axios.get('api/clientgroups').then(resp => {
@@ -51,35 +58,62 @@ export default class DashboardComponent extends Vue {
         }).catch(err => { })
     }
 
+    getEnvironments() {
+        axios.get('api/environments').then(resp => {
+            this.environments = resp.data;
+        }).catch(err => { })
+    }
+
 
     addNewToDo() {
 
-        if (this.newTODO != "") {
-            let item = { code: this.selectedCode, name: this.newTODO, completed: false };
-            this.todoList.push(item);
-            this.newTODO = "";
+        if (this.newTODO.title != "" && this.selectedCode != "") {
+
+            this.newTODO.teamMemberId = this.user.id;
+            this.newTODO.sprintCode = this.selectedCode;
+
+            axios.post('/api/goals', this.newTODO).then(resp => {
+                console.log(resp.data)
+                this.todoList.push(resp.data)
+                this.clearInputs();
+            }).catch(err => { console.log(err) })
+
         }
     }
 
     addEnvironment() {
 
-        if (this.newEnvironment != "") {
+        if (this.newEnvironment.name != '' && this.newEnvironment.code != '' && this.newEnvironment.clientgroup.id != '') {
 
-            // let envs = JSON.parse(this.selectClient)
-            console.log(this.selectClient)
-            let item = { code: this.selectClient, name: this.newEnvironment, completed: false };
-            this.environments.push(item);
-            this.newEnvironment = "";
+            this.newEnvironment.clientGroupId = this.newEnvironment.clientgroup.id
+
+            axios.post('/api/environments', this.newEnvironment).then(resp => {
+                console.log(resp.data)
+                this.environments.push(resp.data)
+                this.clearInputs();
+            }).catch(err => { console.log(err) })
+
         }
     }
 
-    removeTodo(index) {
-        this.todoList.splice(index, 1)
+    clearInputs() {
+        this.newEnvironment = { clientGroupId: '', clientgroup: null, name: '', description: '', extraDetails: '' };
+        this.newTODO = { title: '', sprintCode: '', description: '', goalStart: '', goalEnd: '', done: false, teamMemberId: '' }
+    }
+
+    removeTodo(index, item) {
+
+        axios.delete(`/api/goals/${item.id}`).then(resp => {
+            this.todoList.splice(index, 1)
+        }).catch(err => { })
         // this.todoList = _.reject(this.todoList, (i) => { return i.name == item.name })
     }
 
-    removeEnvironment(index) {
-        this.environments.splice(index, 1)
+    removeEnvironment(index, item) {
+
+        axios.delete(`/api/environments/${item.id}`).then(resp => {
+            this.environments.splice(index, 1)
+        }).catch(err => { })
     }
 
 

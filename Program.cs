@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace dashboard_app
+namespace dashboard
 {
     public class Program
     {
@@ -20,8 +20,8 @@ namespace dashboard_app
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:9000")
                 .UseStartup<Startup>()
+                .UseUrls("http://localhost:9000")
                 .Build();
     }
 }
