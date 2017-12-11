@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import axios from 'axios';
 
 
+
 //Core components
 import Form from '../../core/Form';
 
@@ -29,6 +30,8 @@ export default class MemberComponent extends Vue {
     environments: any[] = [];
 
     mounted() {
+
+       
 
         this.getEnvironments();
 

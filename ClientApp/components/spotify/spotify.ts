@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as globals from '../../globals';
 import VueSpotify from 'vue-spotify';
 import Spotify from './../../services/spotify-service';
-import { HubConnection } from '@aspnet/signalr-client'
+import { HubConnection } from '@aspnet/signalr-client';
 
 interface SpotifyUser { }
 interface Player { }
@@ -30,14 +30,14 @@ export default class SpotifyComponent extends Vue {
 
     mounted() {
 
-        const conn = new HubConnection('http://localhost:9000/player');
+        const conn = new HubConnection('http://localhost:9000/PlayerUpdate');
         let vm = this;
-        conn.on('TestSend', (data) => {
+        conn.on('PlayerUpdate', (data) => {
             vm.serverMessage += "\n" + data;
         })
 
         conn.start()
-            .then(() => console.log("Connected To DashboardHub"));
+            .then(() => console.log("Connected To PlayerHub"));
 
         this.authURL = Spotify.authrizeUrl
 

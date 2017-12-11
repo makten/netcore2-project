@@ -1,35 +1,33 @@
-<style src="./spotify.css"></style>
+<!-- <style src="./spotify.css"></style> -->
 <template>
 
     <div class="tile team-music">
         <!-- <img v-if="currentlyPlaying.item.album.images.length >= 1" :src="currentlyPlaying.item.album.images[2].url"/> -->
         <div class="background-art">
-           
+
         </div>
 
         <!-- <img v-if="spotifyUser.images.length >= 1" :src="spotifyUser.images[0].url" /> -->
         <center style="z-index:9999;">
-            <!-- <div class="user-profile">
+            <div class="user-profile">
                 <div>
                     <img class="user-avatar" v-if="spotifyUser.images.length >= 1" :src="spotifyUser.images[0].url" />
                 </div>
                 <span class="user-name">{{ spotifyUser.display_Name }}</span>
-            </div> -->
-
-            <!-- {{ serverMessage }} -->
-            <!-- <div class="album-art">
-                <img v-if="currentlyPlaying.item.album.images.length >= 1" :src="currentlyPlaying.item.album.images[1].url" width="150" height="150"
-                />
-            </div>-->
-
-  <!-- TO BE DELETED -->
+            </div>
 
             {{ serverMessage }}
+            <div class="album-art">
+                <img v-if="currentlyPlaying.item.album.images.length >= 1" :src="currentlyPlaying.item.album.images[1].url" width="150" height="150"
+                />
+            </div>
+
+
             <a :href="authURL" class="btn btn-success btn-xs">Authorize
                 <i class="fa fa-spotify"></i>
                 </i>
             </a>
-            
+
         </center>
     </div>
 </template>

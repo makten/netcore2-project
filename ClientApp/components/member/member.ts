@@ -4,6 +4,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import * as _ from 'lodash';
 import axios from 'axios';
+import { HubConnection } from '@aspnet/signalr-client';
 
 
 //Core components
@@ -38,6 +39,16 @@ export default class MemberComponent extends Vue {
     members: any[] = [];
 
     mounted() {
+
+        const conn = new HubConnection('http://localhost:9000/GoalUpdate');
+        let vm = this;
+        conn.on('UpdateGoals', (data) => {
+            vm.getMembers();
+        })
+
+        conn.start()
+            .then(() => console.log("Connected To GoalsHub"));
+
 
         this.getMembers();
 

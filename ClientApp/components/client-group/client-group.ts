@@ -4,7 +4,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import * as _ from 'lodash';
 import axios from 'axios';
-
+import { HubConnection } from '@aspnet/signalr-client';
 
 //Core components
 import Form from '../../core/Form';
@@ -22,9 +22,17 @@ export default class MemberComponent extends Vue {
 
     mounted() {
 
+        const conn = new HubConnection('http://localhost:9000/teamEnvironmentUpdate');
+        let vm = this;
+        conn.on('UpdateTeamEnvironment', (data) => {
+            vm.getClientGroups();
+        })
+
+        conn.start()
+            .then(() => console.log("Connected To TeamEnvironment"));
+
         this.getClientGroups();
 
-        // this.loading = !this.loading;
     }
 
 
